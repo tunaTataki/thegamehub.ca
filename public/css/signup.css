@@ -17,6 +17,16 @@ main {
     height: 100vh;                                                 
 }                                                                  
 
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    background-color: black;
+    color: white;
+}
+                    
+
 h1 {
     margin-top: 0;
     color: black;

@@ -1,4 +1,4 @@
-// /home/nick/projects/theGameHub.Express/js/signup.js
+// /var/www/html/bytebloom.tech/express/public/js/signup.js
 
 function sanitize_inputs(email, password) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -13,7 +13,7 @@ function sanitize_inputs(email, password) {
 
 function send_to_server(data) {
 
-    fetch("http://localhost:3000/signupRequest", {
+    fetch("http://localhost:7321/signupRequest", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -50,10 +50,10 @@ document.querySelector("#signup-button").addEventListener("click", function(e) {
     if(!sanitize_inputs(email, password)) {
         // Fail state if user enters improper email || password format
         // TODO
-        console.log("Sanitization failed.")
+        console.log("Sanitization failed.");
     }
 
     send_to_server({email: email, password: password,});
-    console.log("Request sent to server.")
+    console.log("Request sent to server.");
 
 });
