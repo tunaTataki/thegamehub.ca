@@ -23,11 +23,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(expressSession({
-    resave: false,
-    saveUninitialized: false,
-    secret: process.env.COOKIE_SECRET,
-}));
+// Not used as of yet
+/*
+    app.use(expressSession({
+        resave: false,
+        saveUninitialized: false,
+        secret: process.env.COOKIE_SECRET,
+    }));
+*/ 
 
 app.use(express.static("public"));
 
@@ -39,6 +42,7 @@ app.get("/", function(req, res) {
         res.cookie("User-Session", uuidv4(), {
             signed: true,
             maxAge: 86400000,
+            secure: true,
         });
         fs.appendFileSync("logs/cookie-logs", new Date() + ": --- A cookie was created in the / GET route. ---\n\n"); // Log new session cookie, double newline delimiters
     } else {
@@ -55,6 +59,7 @@ app.get("/signup", function(req, res) {
         res.cookie("User-Session", uuidv4(), {
             signed: true,
             maxAge: 86400000,
+            secure: true,
         });
         fs.appendFileSync("logs/cookie-logs", new Date() + ": --- A cookie was created in the /signup GET route. ---\n\n"); // Log new session cookie, double newline delimiters
     } else {
@@ -71,6 +76,7 @@ app.get("/login", function(req, res) {
         res.cookie("User-Session", uuidv4(), {
             signed: true,
             maxAge: 86400000,
+            secure: true,
         });
         fs.appendFileSync("logs/cookie-logs", new Date() + ": --- A cookie was created in the /login GET route. ---\n\n"); // Log new session cookie, double newline delimiters
     } else {
@@ -87,6 +93,7 @@ app.get("/store", function(req, res) {
         res.cookie("User-Session", uuidv4(), {
             signed: true,
             maxAge: 86400000,
+            secure: true,
         });
         fs.appendFileSync("logs/cookie-logs", new Date() + ": --- A cookie was created in the /store GET route. ---\n\n"); // Log new session cookie, double newline delimiters
     } else {
@@ -94,25 +101,24 @@ app.get("/store", function(req, res) {
     }
 
     res.sendFile(path.join(__dirname, "views", "store.html"));
-    // Implement session logic
 });                                                
 
 // POST Routes
 app.post("/signupRequest", function(req, res) {
     const requestBody = req.body;
-    // Left off here, need to implement a database (kill me)
+    // Database interfacing with pgClient
 });                                                
 
 app.post("/loginRequest", function(req, res) {
-    // Implement
+    // Database interfacing with pgClient
 });
 
-app.post("/create-checkout-session", function(req, res) {
+app.post("/createCheckoutSession", function(req, res) {
     // Implement
 });
 
 app.get("*", function(req, res) {
-    // Implement?
+    // Implement? Display custom 404 page
 });
 
 app.listen(port, function() {
