@@ -34,15 +34,25 @@ body {
     }
 
     div.store-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    
         background-color: pink;
-        height: 8rem;
         margin: 1rem;
     }
 
     button.add-to-cart {
         background-color: purple;
-        height: 2rem;
+        height: 4rem;
+        width: 50%;
         margin: 1rem;
+        border-radius: 2rem;
+    }
+
+    img.item-image { /* These width and hight values may only be working because my test image is square | Does "%" here refer to the containing block? */
+        width: 100%;
     }
 
 }
@@ -67,19 +77,29 @@ body {
 
     div#store-items-container {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr;
     }
 
     div.store-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    
         background-color: pink;
-        height: 8rem;
         margin: 1rem;
     }
 
-    div.add-to-cart {
+    button.add-to-cart {
         background-color: purple;
-        height: 2rem;
+        height: 4rem;
+        width: 50%;
         margin: 1rem;
+        border-radius: 2rem;
+    }
+
+    img.item-image { /* These width and hight values may only be working because my test image is square | Does "%" here refer to the containing block? */
+        width: 100%;
     }
 
 }
@@ -104,19 +124,29 @@ body {
 
     div#store-items-container {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     div.store-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    
         background-color: pink;
-        height: 8rem;
         margin: 1rem;
     }
 
-    div.add-to-cart {
+    button.add-to-cart {
         background-color: purple;
-        height: 2rem;
+        height: 4rem;
+        width: 50%;
         margin: 1rem;
+        border-radius: 2rem;
+    }
+
+    img.item-image { /* These width and hight values may only be working because my test image is square | Does "%" here refer to the containing block? */
+        width: 100%;
     }
 
 }
@@ -145,20 +175,30 @@ body {
     }
 
     div.store-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    
         background-color: pink;
-        height: 8rem;
         margin: 1rem;
     }
 
-    div.add-to-cart {
+    button.add-to-cart {
         background-color: purple;
-        height: 2rem;
+        height: 4rem;
+        width: 50%;
         margin: 1rem;
+        border-radius: 2rem;
+    }
+
+    img.item-image { /* These width and hight values may only be working because my test image is square | Does "%" here refer to the containing block? */
+        width: 100%;
     }
 
 }
 
-@media screen and (min-width: 1001px) {
+@media screen and (min-width: 1001px) and (max-width: 1400px) {
 
     /* 05 */
 
@@ -178,19 +218,76 @@ body {
 
     div#store-items-container {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 
     div.store-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    
         background-color: pink;
-        height: 8rem;
         margin: 1rem;
     }
 
-    div.add-to-cart {
+    button.add-to-cart {
         background-color: purple;
-        height: 2rem;
+        height: 4rem;
+        width: 50%;
         margin: 1rem;
+        border-radius: 2rem;
+    }
+
+    img.item-image { /* These width and hight values may only be working because my test image is square | Does "%" here refer to the containing block? */
+        width: 100%;
+    }
+
+}
+
+@media screen and (min-width: 1401px) {
+
+    /* 06 */
+
+    main {
+        height: 100vh;
+        background-image: linear-gradient(135deg, #e831e2 5%, #2a1ccc);
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        background-color: black;
+        color: white;
+    }
+
+    div#store-items-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+
+    div.store-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    
+        background-color: pink;
+        margin: 1rem;
+    }
+
+    button.add-to-cart {
+        background-color: purple;
+        height: 4rem;
+        width: 50%;
+        margin: 1rem;
+        border-radius: 2rem;
+    }
+
+    img.item-image { /* These width and hight values may only be working because my test image is square | Does "%" here refer to the containing block? */
+        width: 100%;
     }
 
 }
