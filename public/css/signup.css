@@ -1,5 +1,5 @@
 /*
- * /home/nick/projects/theGameHub.Express/css/signup.css 
+ * /var/www/html/bytebloom.tech/express/public/css/signup.css
  */
 
 html {                                                             
@@ -10,10 +10,10 @@ html {
 
 body {                                                             
     margin: 0;                                                     
+    background-image: linear-gradient(135deg, #e831e2 5%, #2a1ccc);
 }                                                                  
 
 main {                                                             
-    background-image: linear-gradient(135deg, #e831e2 5%, #2a1ccc);
     height: 100vh;                                                 
 }                                                                  
 

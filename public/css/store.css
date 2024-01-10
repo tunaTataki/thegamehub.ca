@@ -8,6 +8,7 @@ html {
 
 body {
     margin: 0;
+    background-image: linear-gradient(135deg, #e831e2 5%, #2a1ccc);
 }
 
 @media screen and (max-width: 300px) {
@@ -15,8 +16,18 @@ body {
     /* 01 */
 
     main {
-        height: 100vh;
-        background-image: linear-gradient(135deg, #e831e2 5%, #2a1ccc);
+        height: 100%;
+    }
+
+    div#header-spacer {
+        height: 3rem;
+        width: 3rem;
+    }
+
+    header {
+        height: 3rem; 
+        width: 100%;
+        position: fixed;
     }
 
     nav {
@@ -26,6 +37,7 @@ body {
 
         background-color: black;
         color: white;
+        height: 3rem;
     }
 
     div#store-items-container {
@@ -39,12 +51,13 @@ body {
         justify-content: space-evenly;
         align-items: center;
     
-        background-color: pink;
+        background-color: black;
         margin: 1rem;
     }
 
     button.add-to-cart {
         background-color: purple;
+		cursor: pointer;
         height: 4rem;
         width: 50%;
         margin: 1rem;
@@ -62,8 +75,7 @@ body {
     /* 02 */
 
     main {
-        height: 100vh;
-        background-image: linear-gradient(135deg, #e831e2 5%, #2a1ccc);
+        height: 100%;
     }
 
     nav {
@@ -86,12 +98,13 @@ body {
         justify-content: space-evenly;
         align-items: center;
     
-        background-color: pink;
+        background-color: black;
         margin: 1rem;
     }
 
     button.add-to-cart {
         background-color: purple;
+		cursor: pointer;
         height: 4rem;
         width: 50%;
         margin: 1rem;
@@ -109,8 +122,7 @@ body {
     /* 03 */
 
     main {
-        height: 100vh;
-        background-image: linear-gradient(135deg, #e831e2 5%, #2a1ccc);
+        height: 100%;
     }
 
     nav {
@@ -133,12 +145,13 @@ body {
         justify-content: space-evenly;
         align-items: center;
     
-        background-color: pink;
+        background-color: black;
         margin: 1rem;
     }
 
     button.add-to-cart {
         background-color: purple;
+		cursor: pointer;
         height: 4rem;
         width: 50%;
         margin: 1rem;
@@ -156,8 +169,7 @@ body {
     /* 04 */
 
     main {
-        height: 100vh;
-        background-image: linear-gradient(135deg, #e831e2 5%, #2a1ccc);
+        height: 100%;
     }
 
     nav {
@@ -180,12 +192,13 @@ body {
         justify-content: space-evenly;
         align-items: center;
     
-        background-color: pink;
+        background-color: black;
         margin: 1rem;
     }
 
     button.add-to-cart {
         background-color: purple;
+		cursor: pointer;
         height: 4rem;
         width: 50%;
         margin: 1rem;
@@ -203,8 +216,7 @@ body {
     /* 05 */
 
     main {
-        height: 100vh;
-        background-image: linear-gradient(135deg, #e831e2 5%, #2a1ccc);
+        height: 100%;
     }
 
     nav {
@@ -227,12 +239,13 @@ body {
         justify-content: space-evenly;
         align-items: center;
     
-        background-color: pink;
+        background-color: black;
         margin: 1rem;
     }
 
     button.add-to-cart {
         background-color: purple;
+		cursor: pointer;
         height: 4rem;
         width: 50%;
         margin: 1rem;
@@ -250,8 +263,7 @@ body {
     /* 06 */
 
     main {
-        height: 100vh;
-        background-image: linear-gradient(135deg, #e831e2 5%, #2a1ccc);
+        height: 100%;
     }
 
     nav {
@@ -274,12 +286,13 @@ body {
         justify-content: space-evenly;
         align-items: center;
     
-        background-color: pink;
+        background-color: black;
         margin: 1rem;
     }
 
     button.add-to-cart {
         background-color: purple;
+		cursor: pointer;
         height: 4rem;
         width: 50%;
         margin: 1rem;
