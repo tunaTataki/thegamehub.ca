@@ -1,4 +1,4 @@
-<!-- /var/www/html/bytebloom.tech/express/public/signup.html -->
+<!-- /var/www/html/bytebloom.tech/express/views/signup.html -->
 
 <!DOCTYPE html>
 <html lang="en">                                                                                                                                                           
@@ -23,21 +23,32 @@
 
 <body>
 
-    <header>
+    <header class="header"></header> <!-- Jelena nests nothing in header -->
     
-        <nav>
-        
-            <a class="login" href="login">Log-In</a>
-            <a class="signup" href="signup">Sign-Up</a>
-            <a class="store" href="store">Store</a>
+    <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu" />
+    <label for="openSidebarMenu" class="sidebarIconToggle">
+        <div class="spinner diagonal part-1"></div>
+        <div class="spinner horizontal"></div>
+        <div class="spinner diagonal part-2"></div>
+    </label>
 
-        </nav>
+    <div id="sidebarMenu">
+        <ul class="sidebarMenuInner">
+            <nav>
+                <li><a href="/" target="_self">Home</a></li>
+                <li><a href="/signup" target="_self">Signup</a></li>
+                <li><a href="/login" target="_self">Login</a></li>
+                <li><a href="/store" target="_self">Store</a></li>
+                <li><a href="" target="_self">Cart</a></li>
+            </nav>
+        </ul>
+    </div>
 
-    </header>
+    <div id="overlay"></div>
 
     <main>
 
-        <h1>Sign Up</h1>
+        <h1>Signup</h1>
 
         <form id="signupForm">
             <label for="email">Email:</label>

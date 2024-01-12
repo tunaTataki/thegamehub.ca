@@ -3,26 +3,54 @@
 // Cart items
 let cart = [];
 
-// Event handlers that add items to the cart
-const addToCartButtons = document.querySelectorAll("div.add-to-cart");
-for(i = 0; i < addToCartButtons.length; i++) {
-    addToCartButtons[i].addEventListener("click", function() {
-        // clean up header, add sliding side menu 
+document.addEventListener("DOMContentLoaded", function () {
+    const openSidebarMenu = document.querySelector("#openSidebarMenu");
+    const overlay = document.querySelector("#overlay");
+    const addToCartButtons = document.querySelectorAll("div.add-to-cart");
+
+    // Event listener for the menu toggle checkbox
+    openSidebarMenu.addEventListener("change", function() {
+        if (this.checked) {
+            // Menu is open, show the overlay
+            overlay.style.display = "block";
+        } else {
+            // Menu is closed, hide the overlay
+            overlay.style.display = "none";
+        }
     });
-}
 
-/*
- * Test if cookies are disabled
- * Might need a more robust solution
-*/
+    // Event listener for clicks on the overlay (outside the menu)
+    overlay.addEventListener("click", function() {
+        // Close the menu when clicking outside
+        openSidebarMenu.checked = false;
+        overlay.style.display = "none";
+    });
+    // Event listener for adding products to cart, loop for each button on page
+    for(i = 0; i < addToCartButtons.length; i++) {
+        addToCartButtons[i].addEventListener("click", function() {
+            // clean up header, add sliding side menu 
+            // TODO
+        });
+    }
 
-if(document.cookie.length === 0) {
+    // Test if cookies are disabled, might need a more robust solution
+    if(document.cookie.length === 0) {
+        window.alert("Cookies seem to be disabled.\nYour shopping cart might not work correctly.\n\nTo ensure no errors occur,\nplease enable cookies in your browser settings.\n\nThank you!"); 
+    }
+});
 
-    window.alert("Cookies seem to be disabled.\nYour shopping cart might not work correctly.\n\nTo ensure no errors occur,\nplease enable cookies in your browser settings.\n\nThank you!"); 
 
-}
 
-// Don't need below?
+
+
+
+
+// The shame pit
+
+
+
+
+
 
 /* 
     fetch("/api/disabledCookies" {
@@ -38,6 +66,6 @@ if(document.cookie.length === 0) {
     .catch(function() {
         window.alert("Network Error.");
     });
-*/
 
 }
+*/
