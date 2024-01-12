@@ -44,10 +44,14 @@ app.get("/", function(req, res) {
             maxAge: 86400000,
             secure: true,
         });
-        fs.appendFileSync("logs/cookie-logs", new Date() + ": --- A cookie was created in the / GET route. ---\n\n"); // Log new session cookie, double newline delimiters
-    } else {
-        fs.appendFileSync("logs/cookie-logs", new Date() + ": --- Existing cookie in / GET route. ---\n" + userSessionCookie + "\n\n"); // Log existing session cookie
     }
+
+/* This is somehow creating 502 bad gateway errors. No clue why, possibly due to the synchronicity? IDK man.
+        fs.appendFileSync("logs/cookie-logs", new Date() + ": --- A cookie was created in the / GET route. ---\n\n"); // Log new session cookie, double newline delimiters
+    else {
+        fs.appendFileSync("/var/www/html/bytebloom.tech/express/logs/cookie-logs", new Date() + ": --- Existing cookie in /store GET route. ---\n" + userSessionCookie + "\n\n"); // Log existing session cookie
+    }
+*/
 
     res.sendFile(path.join(__dirname, "views", "index.html"));
 });                                                
@@ -61,10 +65,14 @@ app.get("/signup", function(req, res) {
             maxAge: 86400000,
             secure: true,
         });
+    }
+
+/* This is somehow creating 502 bad gateway errors. No clue why, possibly due to the synchronicity? IDK man.
         fs.appendFileSync("logs/cookie-logs", new Date() + ": --- A cookie was created in the /signup GET route. ---\n\n"); // Log new session cookie, double newline delimiters
     } else {
         fs.appendFileSync("logs/cookie-logs", new Date() + ": --- Existing cookie in /signup GET route. ---\n" + userSessionCookie + "\n\n"); // Log existing session cookie
     }
+*/
 
     res.sendFile(path.join(__dirname, "views", "signup.html"));
 });                                                
@@ -78,10 +86,14 @@ app.get("/login", function(req, res) {
             maxAge: 86400000,
             secure: true,
         });
+    } 
+    
+/* This is somehow creating 502 bad gateway errors. No clue why, possibly due to the synchronicity? IDK man.
         fs.appendFileSync("logs/cookie-logs", new Date() + ": --- A cookie was created in the /login GET route. ---\n\n"); // Log new session cookie, double newline delimiters
-    } else {
-        fs.appendFileSync("logs/cookie-logs", new Date() + ": --- Existing cookie in /login GET route. ---\n" + userSessionCookie + "\n\n"); // Log existing session cookie
+    else {
+        fs.appendFileSync("/var/www/html/bytebloom.tech/express/logs/cookie-logs", new Date() + ": --- Existing cookie in /login GET route. ---\n" + userSessionCookie + "\n\n"); // Log existing session cookie
     }
+*/
 
     res.sendFile(path.join(__dirname, "views", "login.html"));
 });                                                
@@ -95,10 +107,14 @@ app.get("/store", function(req, res) {
             maxAge: 86400000,
             secure: true,
         });
-        fs.appendFileSync("logs/cookie-logs", new Date() + ": --- A cookie was created in the /store GET route. ---\n\n"); // Log new session cookie, double newline delimiters
-    } else {
-        fs.appendFileSync("logs/cookie-logs", new Date() + ": --- Existing cookie in /store GET route. ---\n" + userSessionCookie + "\n\n"); // Log existing session cookie
+    } 
+    
+/* This is somehow creating 502 bad gateway errors. No clue why, possibly due to the synchronicity? IDK man.
+        fs.appendFileSync("/var/www/html/bytebloom.tech/express/logs/cookie-logs", new Date() + ": --- A cookie was created in the /store GET route. ---\n\n"); // Log new session cookie, double newline delimiters
+    else {
+        fs.appendFileSync("/var/www/html/bytebloom.tech/express/logs/cookie-logs", new Date() + ": --- Existing cookie in /store GET route. ---\n" + userSessionCookie + "\n\n"); // Log existing session cookie
     }
+*/
 
     res.sendFile(path.join(__dirname, "views", "store.html"));
 });                                                

@@ -1,4 +1,4 @@
-<!-- /home/nick/projects/theGameHub.Express/index.html -->
+<!-- /var/www/html/bytebloom.tech/express/views/index.html -->
 
 <!DOCTYPE html>                                                                                                                     
 
@@ -18,23 +18,32 @@
     <!-- Think about adding OG meta tags, and the twitter tags too -->
     <!-- Add Favicon and variants -->
 
-    <link rel="stylesheet" href="css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="css/index.css" type="text/css" />
 
 </head>
 
 <body>
 
-    <header>
+    <header class="header"></header> <!-- Jelena nests nothing in header -->
 
-        <nav>
+    <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu" />
+    <label for="openSidebarMenu" class="sidebarIconToggle">             
+        <div class="spinner diagonal part-1"></div>                     
+        <div class="spinner horizontal"></div>                          
+        <div class="spinner diagonal part-2"></div>                     
+    </label>                                                            
 
-            <a class="login" href="login">Log-In</a>
-            <a class="signup" href="signup">Sign-Up</a>
-            <a class="store" href="store">Store</a>
-
-        </nav>
-
-    </header>
+    <div id="sidebarMenu">
+        <ul class="sidebarMenuInner">
+            <li><a href="https://bytebloom.tech/" target="_blank">Home</a></li>
+            <li><a href="https://bytebloom.tech/signup" target="_blank">Signup</a></li>
+            <li><a href="https://bytebloom.tech/login" target="_blank">Login</a></li>
+            <li><a href="https://bytebloom.tech/store" target="_blank">Store</a></li>
+            <li><a href="" target="_blank">Cart</a></li>
+        </ul>
+    </div>
+                                    
+                
 
     <main>
 
