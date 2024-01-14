@@ -1,5 +1,37 @@
 /* /var/www/html/bytebloom.tech/express/public/css/store.css */
 
+@font-face {                                                   
+    font-family: 'ralewaythin';                                
+    src: url('/fonts/raleway/raleway-thin-webfont.woff2') format('woff2'),    
+         url('/fonts/raleway/raleway-thin-webfont.woff') format('woff');      
+    font-weight: normal;                                       
+    font-style: normal;                                        
+}                                                              
+                                                               
+@font-face {                                                   
+    font-family: 'ralewaysemibold';                            
+    src: url('/fonts/raleway/raleway-semibold-webfont.woff2') format('woff2'),
+         url('/fonts/raleway/raleway-semibold-webfont.woff') format('woff');  
+    font-weight: normal;                                       
+    font-style: normal;                                        
+}                                                              
+                                                               
+@font-face {                                                   
+    font-family: 'ralewayregular';                             
+    src: url('/fonts/raleway/raleway-regular-webfont.woff2') format('woff2'), 
+         url('/fonts/raleway/raleway-regular-webfont.woff') format('woff');   
+    font-weight: normal;                                       
+    font-style: normal;                                        
+}                                                              
+                                                               
+@font-face {                                                   
+    font-family: 'ralewaymedium';                              
+    src: url('/fonts/raleway/raleway-medium-webfont.woff2') format('woff2'),  
+         url('/fonts/raleway/raleway-medium-webfont.woff') format('woff');    
+    font-weight: normal;                                       
+    font-style: normal;                                        
+}                                                              
+
 @font-face {
     font-family: 'sansationregular';
     src: url('/fonts/sansation/sansation-regular-webfont.woff2') format('woff2'),
@@ -48,7 +80,8 @@ html {
 
 body {
     margin: 0;
-    background-image: linear-gradient(135deg, #e831e2 5%, #2a1ccc);
+/*  background-image: linear-gradient(135deg, #e831e2 5%, #2a1ccc); */
+    background-color: #fff;
 }
 
 /************************************************ SLIDER MENU ************************************************/
@@ -89,7 +122,6 @@ body {
     text-transform: uppercase;
     font-weight: bold;
     padding: 20px;
-    cursor: pointer;
     border-bottom: 1px solid rgba(255, 255, 255, 0.10);
 }
 
@@ -204,11 +236,20 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
     z-index: 1;
 }
 
+#logoDiv {
+    display: flex;
+    justify-content: center;
+}
+
+img[alt="The Game Hub Logo."] {
+    margin: auto;
+}
+
 /************************************************ END SLIDER MENU ************************************************/
 
 @media screen and (max-width: 300px) {
 
-    /* 01 */
+    /* 001 */
 
     main {
          
@@ -216,7 +257,21 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
 
     div#store-items-container {
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    div#store-items-container > * {
+        margin: 1rem 0 0 0; 
+    }
+
+    div#store-items-container > :nth-child(2n - 1) {
+        margin-right: 0.25rem;
+        margin-left: 0.5rem;
+    }
+
+    div#store-items-container > :nth-child(2n) {
+        margin-left: 0.25rem;
+        margin-right: 0.5rem;
     }
 
     #spacer {
@@ -231,37 +286,77 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
         justify-content: space-evenly;
         align-items: center;
     
-        background-color: black;
-        margin: 1rem;
+        background-color: #fff;
+        margin: 1.5rem;
+        border-radius: 1rem;
+        border: solid 1px #000;
     }
 
     h2.item-title {
-        font-family: "sansationregular", sans-serif;
+        font-family: "ralewayregular", sans-serif;
+        font-size: 1.2rem;
+        text-align: center;
+        color: #000;
+    }
+
+    h3.item-price {
+        font-family: "ralewaythin", sans-serif;
+        font-size: 0.8rem; 
+        text-align: center;
+        color: #000;
     }
 
     p.item-description {
         font-family: "sansationregular", sans-serif;
         margin: 1rem;
+        text-align: center;
+        display: none;
+        color: #000;
     }
 
     button.add-to-cart {
-        background-color: purple;
+		font-family: "edgedisplaybold", sans-serif;
+        background-image: linear-gradient(to right, #e530e0, 20%, #281dcf);;
 		cursor: pointer;
         height: 4rem;
-        width: 50%;
+        width: 75%;
         margin: 1rem;
         border-radius: 2rem;
     }
 
-    img.item-image { /* These width and hight values may only be working because my test image is square | Does "%" here refer to the containing block? */
+    div.item-image-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    
         width: 100%;
+        height: 120%;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        background-color: #fff;
+    }
+
+    img.item-image {
+        width: 100%;
+        height: 100%;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        object-fit: cover;
+    }
+
+    footer {
+        font-family: "leaguegothicregular", sans-serif;
+        height: 3rem; 
+        text-align: end;
+        margin-top: 1.5rem;
+        color: #000;
     }
 
 }
 
 @media screen and (min-width: 301px) and (max-width: 400px) {
 
-    /* 02 */
+    /* 002 */
 
     main {
         
@@ -269,7 +364,21 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
 
     div#store-items-container {
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    div#store-items-container > * {
+        margin: 1rem 0 0 0; 
+    }
+
+    div#store-items-container > :nth-child(2n - 1) {
+        margin-right: 0.5rem;
+        margin-left: 1rem;
+    }
+
+    div#store-items-container > :nth-child(2n) {
+        margin-left: 0.5rem;
+        margin-right: 1rem;
     }
 
     #spacer {
@@ -284,37 +393,78 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
         justify-content: space-evenly;
         align-items: center;
     
-        background-color: black;
-        margin: 1rem;
+        background-color: #fff;
+/*      margin: 1rem; */
+        border-radius: 1rem;
+        border: solid 1px #000;
     }
 
     h2.item-title {
-        font-family: "sansationregular", sans-serif;
+        font-family: "ralewayregular", sans-serif;
+        font-size: 1.2rem;
+        color: #000;
+    }
+
+    h3.item-price {
+        font-family: "ralewaythin", sans-serif;
+        font-size: 0.8rem; 
+        text-align: center;
+        margin-bottom: 0;
+        margin-top: 0;
+        color: #000;
     }
 
     p.item-description {
         font-family: "sansationregular", sans-serif;
-        margin: 1rem;
+        font-size: 0.8rem;
+        margin: 0.8rem;
+        text-align: center;
+        color: #000;
     }
 
     button.add-to-cart {
-        background-color: purple;
+		font-family: "edgedisplaybold", sans-serif;
+        background-image: linear-gradient(to right, #e530e0, 20%, #281dcf);;
 		cursor: pointer;
         height: 4rem;
-        width: 50%;
+        width: 75%;
         margin: 1rem;
         border-radius: 2rem;
     }
 
-    img.item-image { /* These width and hight values may only be working because my test image is square | Does "%" here refer to the containing block? */
+    div.item-image-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    
         width: 100%;
+        height: 120%;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        background-color: #fff;
+    }
+
+    img.item-image {
+        width: 100%;
+        height: 100%;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        object-fit: cover;
+    }
+
+    footer {
+        font-family: "leaguegothicregular", sans-serif;
+        height: 3rem; 
+        text-align: end;
+        margin-top: 1.5rem;
+        color: #000;
     }
 
 }
 
 @media screen and (min-width: 401px) and (max-width: 600px) {
 
-    /* 03 */
+    /* 003 */
 
     main {
 
@@ -325,6 +475,20 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
         grid-template-columns: 1fr 1fr;
     }
 
+    div#store-items-container > * {
+        margin: 1rem 0 0 0; 
+    }
+
+    div#store-items-container > :nth-child(2n - 1) {
+        margin-right: 0.5rem;
+        margin-left: 1rem;
+    }
+
+    div#store-items-container > :nth-child(2n) {
+        margin-left: 0.5rem;
+        margin-right: 1rem;
+    }
+
     #spacer {
         height: 4rem; 
         width: 100%;
@@ -337,37 +501,79 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
         justify-content: space-evenly;
         align-items: center;
     
-        background-color: black;
+        background-color: #fff;
         margin: 1rem;
+        border-radius: 1rem;
+        border: solid 1px #000;
     }
 
     h2.item-title {
-        font-family: "sansationregular", sans-serif;
+        font-family: "ralewayregular", sans-serif;
+        font-size: 1.5rem;
+        color: #000;
+    }
+
+    h3.item-price {
+        font-family: "ralewaythin", sans-serif;
+        font-size: 0.8rem; 
+        text-align: center;
+        margin-bottom: 0;
+        margin-top: 0;
+        color: #000;
     }
 
     p.item-description {
         font-family: "sansationregular", sans-serif;
         margin: 1rem;
+        text-align: center;
+        color: #000;
     }
 
     button.add-to-cart {
-        background-color: purple;
+		font-family: "edgedisplaybold", sans-serif;
+        font-size: 1rem;
+        background-image: linear-gradient(to right, #e530e0, 20%, #281dcf);;
 		cursor: pointer;
         height: 4rem;
-        width: 50%;
+        width: 75%;
         margin: 1rem;
         border-radius: 2rem;
     }
 
-    img.item-image { /* These width and hight values may only be working because my test image is square | Does "%" here refer to the containing block? */
+    div.item-image-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    
         width: 100%;
+        height: 120%;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        background-color: #fff;
+    }
+
+    img.item-image {
+        width: 100%;
+        height: 100%;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        object-fit: cover;
+    }
+
+    footer {
+        font-family: "leaguegothicregular", sans-serif;
+        font-size: 1rem;
+        height: 3rem; 
+        text-align: end;
+        margin-top: 1.5rem;
+        color: #000;
     }
 
 }
 
 @media screen and (min-width: 601px) and (max-width: 1000px) {
 
-    /* 04 */
+    /* 004 */
 
     main {
         
@@ -378,6 +584,15 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
         grid-template-columns: 1fr 1fr 1fr;
     }
 
+    div#store-items-container > * {
+        margin: 1rem 0 0 0; /* Top, Right, Bottom, Left margin */
+    }
+
+    div#store-items-container > :nth-child(1n) {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+
     #spacer {
         height: 4rem; 
         width: 100%;
@@ -390,37 +605,77 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
         justify-content: space-evenly;
         align-items: center;
     
-        background-color: black;
+        background-color: #fff;
         margin: 1rem;
+        border-radius: 1rem;
+        border: solid 1px #000;
     }
 
     h2.item-title {
-        font-family: "sansationregular", sans-serif;
+        font-family: "ralewayregular", sans-serif;
+        color: #000;
+    }
+
+    h3.item-price {
+        font-family: "ralewaythin", sans-serif;
+        font-size: 0.8rem; 
+        text-align: center;
+        margin-bottom: 0;
+        margin-top: 0;
+        color: #000;
     }
 
     p.item-description {
         font-family: "sansationregular", sans-serif;
         margin: 1rem;
+        text-align: center;
+        color: #000;
     }
 
     button.add-to-cart {
-        background-color: purple;
+		font-family: "edgedisplaybold", sans-serif;
+        font-size: 1rem;
+        background-image: linear-gradient(to right, #e530e0, 20%, #281dcf);;
 		cursor: pointer;
         height: 4rem;
-        width: 50%;
+        width: 75%;
         margin: 1rem;
         border-radius: 2rem;
     }
 
-    img.item-image { /* These width and hight values may only be working because my test image is square | Does "%" here refer to the containing block? */
+    div.item-image-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    
         width: 100%;
+        height: 120%;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        background-color: #fff;
+    }
+
+    img.item-image {
+        width: 100%;
+        height: 100%;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        object-fit: cover;
+    }
+
+    footer {
+        font-family: "leaguegothicregular", sans-serif;
+        height: 3rem; 
+        text-align: end;
+        margin-top: 1.5rem;
+        color: #000;
     }
 
 }
 
 @media screen and (min-width: 1001px) and (max-width: 1400px) {
 
-    /* 05 */
+    /* 005 */
 
     main {
 
@@ -443,37 +698,80 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
         justify-content: space-evenly;
         align-items: center;
     
-        background-color: black;
+        background-color: #fff;
         margin: 1rem;
+        border-radius: 1rem;
+        border: solid 1px #000;
     }
 
     h2.item-title {
-        font-family: "sansationregular", sans-serif;
+        font-family: "ralewayregular", sans-serif;
+        font-size: 1.9rem;
+        color: #000;
+    }
+
+    h3.item-price {
+        font-family: "ralewaythin", sans-serif;
+        font-size: 0.9rem; 
+        text-align: center;
+        margin-bottom: 0;
+        margin-top: 0;
+        color: #000;
     }
 
     p.item-description {
         font-family: "sansationregular", sans-serif;
+        font-size: 1.1rem;
         margin: 1rem;
+        text-align: center;
+        color: #000;
     }
 
     button.add-to-cart {
-        background-color: purple;
+		font-family: "edgedisplaybold", sans-serif;
+        font-size: 1rem;
+        background-image: linear-gradient(to right, #e530e0, 20%, #281dcf);;
 		cursor: pointer;
         height: 4rem;
-        width: 50%;
+        width: 75%;
         margin: 1rem;
         border-radius: 2rem;
     }
 
-    img.item-image { /* These width and hight values may only be working because my test image is square | Does "%" here refer to the containing block? */
+    div.item-image-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    
         width: 100%;
+        height: 120%;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        background-color: #fff;
+    }
+
+    img.item-image {
+        width: 100%;
+        height: 100%;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        object-fit: cover;
+    }
+
+    footer {
+        font-family: "leaguegothicregular", sans-serif;
+        font-size: 2rem;
+        height: 3rem; 
+        text-align: end;
+        margin-top: 1.5rem;
+        color: #000;
     }
 
 }
 
 @media screen and (min-width: 1401px) {
 
-    /* 06 */
+    /* 006 */
 
     main {
 
@@ -496,30 +794,72 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
         justify-content: space-evenly;
         align-items: center;
     
-        background-color: black;
+        background-color: #fff;
         margin: 1rem;
+        border-radius: 1rem;
+        border: solid 1px #000;
     }
 
     h2.item-title {
-        font-family: "sansationbold", sans-serif;
+        font-family: "ralewayregular", sans-serif;
+        margin-bottom: 0;
+        color: #000;
+    }
+
+    h3.item-price {
+        font-family: "ralewaythin", sans-serif;
+        font-size: 1rem;
+        color: #000;
     }
 
     p.item-description {
-        font-family: "edgedisplayregular", sans-serif;
-        margin: 1rem;
+        font-family: "sansationregular", sans-serif;
+        margin: 0 1rem 1rem 1rem;
+        text-align: center;
+        color: #000;
     }
 
     button.add-to-cart {
-        background-color: purple;
+		font-family: "edgedisplaybold", sans-serif;
+        font-size: 1rem;
+        background-image: linear-gradient(to right, #e530e0, 20%, #281dcf);;
 		cursor: pointer;
-        height: 4rem;
-        width: 50%;
+        height: 4.5rem;
+        width: 75%;
         margin: 1rem;
         border-radius: 2rem;
+        border-color: #000;
     }
 
-    img.item-image { /* These width and hight values may only be working because my test image is square | Does "%" here refer to the containing block? */
+    div.item-image-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    
         width: 100%;
+        height: 120%;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        background-color: #fff;
+/*      border-bottom: solid 1px #000; */
+    }
+
+    img.item-image {
+        width: 100%;
+        height: 100%;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        object-fit: cover;
+    }
+
+    footer {
+        font-family: "leaguegothicregular", sans-serif;
+        font-size: 2rem;
+        color: #000;
+/*      border-top: #000 solid 1px; */
+        height: 3rem; 
+        text-align: end;
+        margin-top: 1.5rem;
     }
 
 }

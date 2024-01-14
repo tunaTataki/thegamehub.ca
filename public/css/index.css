@@ -90,7 +90,6 @@ body {
     text-transform: uppercase;
     font-weight: bold;
     padding: 20px;
-    cursor: pointer;
     border-bottom: 1px solid rgba(255, 255, 255, 0.10);
 }
 
@@ -203,6 +202,15 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
     height: 100%;
     background: rgba(0, 0, 0, 0);
     z-index: 1;
+}
+
+#logoDiv {                     
+    display: flex;
+    justify-content: center;
+}
+
+img[alt="The Game Hub Logo."] {
+    margin: auto;
 }
 
 /************************************************ END SLIDER MENU ************************************************/
