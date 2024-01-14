@@ -4,6 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const openSidebarMenu = document.querySelector("#openSidebarMenu");
     const overlay = document.querySelector("#overlay");
 
+    // Close slide-menu on refresh
+    if(openSidebarMenu.checked == true) {
+        openSidebarMenu.checked = false;
+    }
+
+
     // Event listener for the menu toggle checkbox
     openSidebarMenu.addEventListener("change", function () {
         if (this.checked) {

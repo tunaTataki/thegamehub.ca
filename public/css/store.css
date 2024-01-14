@@ -92,7 +92,7 @@ body {
     width: 100%;
     max-width: 100%;
     box-shadow: none;
-    background-color: black;
+    background-color: #000;
     position: fixed;
     height: 4rem!important;   
     overflow: hidden;
@@ -107,7 +107,7 @@ body {
     transform: translateX(-250px);
     transition: transform 250ms ease-in-out;
     background: black; /* linear-gradient(180deg, black 0%, #3F5EFB 100%); - this gradient has a nice blue */
-    z-index: 2;
+    z-index: 3;
 }
 
 .sidebarMenuInner {
@@ -138,11 +138,16 @@ body {
     letter-spacing: 5px;
     background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
     -webkit-background-clip: text; /* Apply background-clip to text */
+    background-clip: text;
     color: transparent; /* Make the text color transparent */
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
     text-decoration: none;
+}
+
+#cart {
+
 }
 
 input[type="checkbox"]:checked ~ #sidebarMenu {
@@ -314,14 +319,28 @@ img[alt="The Game Hub Logo."] {
         color: #000;
     }
 
+    div.button-wrapper {
+        background: black; 
+        width: 75%;
+        height: 5rem;
+        border-radius: 2rem;
+        margin: 1rem;
+    }
+
     button.add-to-cart {
 		font-family: "edgedisplaybold", sans-serif;
-        background-image: linear-gradient(to right, #e530e0, 20%, #281dcf);;
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+/*      background-image: linear-gradient(to right, #e530e0, 20%, #281dcf); */
 		cursor: pointer;
-        height: 4rem;
-        width: 75%;
-        margin: 1rem;
+        height: 100%;
+        width: 100%;
         border-radius: 2rem;
+        border: none;
+
+        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        -webkit-background-clip: text; /* Apply background-clip to text */
+        color: transparent; /* Make the text color transparent */
     }
 
     div.item-image-container {
@@ -344,6 +363,30 @@ img[alt="The Game Hub Logo."] {
         object-fit: cover;
     }
 
+    div#cart-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: auto; 
+        width: 80vw;
+        height: 80vh;
+        background-color: #000;
+        z-index: 5;
+    }
+
+    div.hidden {
+        display: none; 
+    }
+
+    button.close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 2rem;
+        height: 2rem;
+    }
+
     footer {
         font-family: "leaguegothicregular", sans-serif;
         height: 3rem; 
@@ -356,7 +399,7 @@ img[alt="The Game Hub Logo."] {
 
 @media screen and (min-width: 301px) and (max-width: 400px) {
 
-    /* 002 */
+    /* 002 - This repersents usual mobile screen portrait widths */
 
     main {
         
@@ -422,14 +465,28 @@ img[alt="The Game Hub Logo."] {
         color: #000;
     }
 
+    div.button-wrapper {
+        background: black; 
+        width: 75%;
+        height: 5rem;
+        border-radius: 2rem;
+        margin: 1rem;
+    }
+
     button.add-to-cart {
 		font-family: "edgedisplaybold", sans-serif;
-        background-image: linear-gradient(to right, #e530e0, 20%, #281dcf);;
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+/*      background-image: linear-gradient(to right, #e530e0, 20%, #281dcf); */
 		cursor: pointer;
-        height: 4rem;
-        width: 75%;
-        margin: 1rem;
+        height: 100%;
+        width: 100%;
         border-radius: 2rem;
+        border: none;
+
+        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        -webkit-background-clip: text; /* Apply background-clip to text */
+        color: transparent; /* Make the text color transparent */
     }
 
     div.item-image-container {
@@ -450,6 +507,30 @@ img[alt="The Game Hub Logo."] {
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
         object-fit: cover;
+    }
+
+    div#cart-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: auto; 
+        width: 80vw;
+        height: 80vh;
+        background-color: #000;
+        z-index: 5;
+    }
+
+    div.hidden {
+        display: none; 
+    }
+
+    button.close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 2rem;
+        height: 2rem;
     }
 
     footer {
@@ -529,15 +610,28 @@ img[alt="The Game Hub Logo."] {
         color: #000;
     }
 
+    div.button-wrapper {
+        background: black; 
+        width: 75%;
+        height: 5rem;
+        border-radius: 2rem;
+        margin: 1rem;
+    }
+
     button.add-to-cart {
 		font-family: "edgedisplaybold", sans-serif;
         font-size: 1rem;
-        background-image: linear-gradient(to right, #e530e0, 20%, #281dcf);;
+        letter-spacing: 2px;
+/*      background-image: linear-gradient(to right, #e530e0, 20%, #281dcf); */
 		cursor: pointer;
-        height: 4rem;
-        width: 75%;
-        margin: 1rem;
+        height: 100%;
+        width: 100%;
         border-radius: 2rem;
+        border: none;
+
+        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        -webkit-background-clip: text; /* Apply background-clip to text */
+        color: transparent; /* Make the text color transparent */
     }
 
     div.item-image-container {
@@ -558,6 +652,30 @@ img[alt="The Game Hub Logo."] {
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
         object-fit: cover;
+    }
+
+    div#cart-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: auto; 
+        width: 70vw;
+        height: 80vh;
+        background-color: #000;
+        z-index: 5;
+    }
+
+    div.hidden {
+        display: none; 
+    }
+
+    button.close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 2rem;
+        height: 2rem;
     }
 
     footer {
@@ -632,15 +750,28 @@ img[alt="The Game Hub Logo."] {
         color: #000;
     }
 
+    div.button-wrapper {
+        background: black; 
+        width: 75%;
+        height: 5rem;
+        border-radius: 2rem;
+        margin: 1rem;
+    }
+
     button.add-to-cart {
 		font-family: "edgedisplaybold", sans-serif;
         font-size: 1rem;
-        background-image: linear-gradient(to right, #e530e0, 20%, #281dcf);;
+        letter-spacing: 2px;
+/*      background-image: linear-gradient(to right, #e530e0, 20%, #281dcf); */
 		cursor: pointer;
-        height: 4rem;
-        width: 75%;
-        margin: 1rem;
+        height: 100%;
+        width: 100%;
         border-radius: 2rem;
+        border: none;
+
+        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        -webkit-background-clip: text; /* Apply background-clip to text */
+        color: transparent; /* Make the text color transparent */
     }
 
     div.item-image-container {
@@ -661,6 +792,30 @@ img[alt="The Game Hub Logo."] {
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
         object-fit: cover;
+    }
+
+    div#cart-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: auto; 
+        width: 70vw;
+        height: 80vh;
+        background-color: #000;
+        z-index: 5;
+    }
+
+    div.hidden {
+        display: none; 
+    }
+
+    button.close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 2rem;
+        height: 2rem;
     }
 
     footer {
@@ -727,15 +882,28 @@ img[alt="The Game Hub Logo."] {
         color: #000;
     }
 
+    div.button-wrapper {
+        background: black; 
+        width: 75%;
+        height: 5rem;
+        border-radius: 2rem;
+        margin: 1rem;
+    }
+
     button.add-to-cart {
 		font-family: "edgedisplaybold", sans-serif;
         font-size: 1rem;
-        background-image: linear-gradient(to right, #e530e0, 20%, #281dcf);;
+        letter-spacing: 2px;
+/*      background-image: linear-gradient(to right, #e530e0, 20%, #281dcf); */
 		cursor: pointer;
-        height: 4rem;
-        width: 75%;
-        margin: 1rem;
+        height: 100%;
+        width: 100%;
         border-radius: 2rem;
+        border: none;
+
+        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        -webkit-background-clip: text; /* Apply background-clip to text */
+        color: transparent; /* Make the text color transparent */
     }
 
     div.item-image-container {
@@ -756,6 +924,30 @@ img[alt="The Game Hub Logo."] {
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
         object-fit: cover;
+    }
+
+    div#cart-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: auto; 
+        width: 50vw;
+        height: 80vh;
+        background-color: #000;
+        z-index: 2;
+    }
+
+    div.hidden {
+        display: none; 
+    }
+
+    button.close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 2rem;
+        height: 2rem;
     }
 
     footer {
@@ -819,16 +1011,28 @@ img[alt="The Game Hub Logo."] {
         color: #000;
     }
 
+    div.button-wrapper {
+        background: black; 
+        width: 75%;
+        height: 5rem;
+        border-radius: 2rem;
+        margin: 1rem;
+    }
+
     button.add-to-cart {
 		font-family: "edgedisplaybold", sans-serif;
         font-size: 1rem;
-        background-image: linear-gradient(to right, #e530e0, 20%, #281dcf);;
+        letter-spacing: 2px;
+/*      background-image: linear-gradient(to right, #e530e0, 20%, #281dcf); */
 		cursor: pointer;
-        height: 4.5rem;
-        width: 75%;
-        margin: 1rem;
+        height: 100%;
+        width: 100%;
         border-radius: 2rem;
-        border-color: #000;
+        border: none;
+
+        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        -webkit-background-clip: text; /* Apply background-clip to text */
+        color: transparent; /* Make the text color transparent */
     }
 
     div.item-image-container {
@@ -852,6 +1056,30 @@ img[alt="The Game Hub Logo."] {
         object-fit: cover;
     }
 
+    div#cart-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: auto; 
+        width: 50vw;
+        height: 80vh;
+        background-color: #000;
+        z-index: 2;
+    }
+
+    div.hidden {
+        display: none; 
+    }
+
+    button.close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 2rem;
+        height: 2rem;
+    }
+
     footer {
         font-family: "leaguegothicregular", sans-serif;
         font-size: 2rem;
@@ -861,5 +1089,4 @@ img[alt="The Game Hub Logo."] {
         text-align: end;
         margin-top: 1.5rem;
     }
-
 }
