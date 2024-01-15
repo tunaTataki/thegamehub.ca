@@ -338,7 +338,7 @@ img[alt="The Game Hub Logo."] {
         border-radius: 2rem;
         border: none;
 
-        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        background: #FFF700;
         -webkit-background-clip: text; /* Apply background-clip to text */
         color: transparent; /* Make the text color transparent */
     }
@@ -364,15 +364,24 @@ img[alt="The Game Hub Logo."] {
     }
 
     div#cart-overlay {
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         margin: auto; 
         width: 80vw;
-        height: 80vh;
+        height: 70vh;
+        overflow-y: auto;
         background-color: #000;
+        border: solid 0.2rem #FFF700;
         z-index: 5;
+    }
+
+    .flex-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-content: stretch;
     }
 
     div.hidden {
@@ -380,11 +389,26 @@ img[alt="The Game Hub Logo."] {
     }
 
     button.close {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        
+        font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Twemoji', 'Apple Color Emoji', 'Segoe UI Symbol', 'Android Emoji', 'EmojiSymbols', sans-serif;
+        font-size: 1.4rem;
         position: absolute;
         top: 1rem;
         right: 1rem;
-        width: 2rem;
-        height: 2rem;
+        width: 1.8rem;
+        height: 1.8rem;
+        color: #000;
+        background-color: #FFF700;
+        border: none;
+        border-radius: 1rem;
+        cursor: pointer;
+    }
+
+    span.close {
+         
     }
 
     footer {
@@ -484,7 +508,7 @@ img[alt="The Game Hub Logo."] {
         border-radius: 2rem;
         border: none;
 
-        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        background: #FFF700; /* linear-gradient(to right, #e530e0, 20%, #281dcf); */
         -webkit-background-clip: text; /* Apply background-clip to text */
         color: transparent; /* Make the text color transparent */
     }
@@ -510,15 +534,24 @@ img[alt="The Game Hub Logo."] {
     }
 
     div#cart-overlay {
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         margin: auto; 
         width: 80vw;
-        height: 80vh;
+        height: 70vh;
+        overflow-y: auto;
         background-color: #000;
+        border: solid 0.2rem #FFF700;
         z-index: 5;
+    }
+
+    .flex-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-content: stretch;
     }
 
     div.hidden {
@@ -526,11 +559,26 @@ img[alt="The Game Hub Logo."] {
     }
 
     button.close {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        
+        font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Twemoji', 'Apple Color Emoji', 'Segoe UI Symbol', 'Android Emoji', 'EmojiSymbols', sans-serif;
+        font-size: 1.4rem;
         position: absolute;
         top: 1rem;
         right: 1rem;
-        width: 2rem;
-        height: 2rem;
+        width: 1.8rem;
+        height: 1.8rem;
+        color: #000;
+        background-color: #FFF700;
+        border: none;
+        border-radius: 1rem;
+        cursor: pointer;
+    }
+
+    span.close {
+         
     }
 
     footer {
@@ -629,7 +677,7 @@ img[alt="The Game Hub Logo."] {
         border-radius: 2rem;
         border: none;
 
-        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        background: #FFF700;
         -webkit-background-clip: text; /* Apply background-clip to text */
         color: transparent; /* Make the text color transparent */
     }
@@ -655,15 +703,24 @@ img[alt="The Game Hub Logo."] {
     }
 
     div#cart-overlay {
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         margin: auto; 
         width: 70vw;
-        height: 80vh;
+        height: 70vh;
+        overflow-y: auto;
         background-color: #000;
+        border: solid 0.2rem #FFF700;
         z-index: 5;
+    }
+
+    .flex-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-content: stretch;
     }
 
     div.hidden {
@@ -671,11 +728,26 @@ img[alt="The Game Hub Logo."] {
     }
 
     button.close {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        
+        font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Twemoji', 'Apple Color Emoji', 'Segoe UI Symbol', 'Android Emoji', 'EmojiSymbols', sans-serif;
+        font-size: 1.4rem;
         position: absolute;
         top: 1rem;
         right: 1rem;
-        width: 2rem;
-        height: 2rem;
+        width: 1.8rem;
+        height: 1.8rem;
+        color: #000;
+        background-color: #FFF700;
+        border: none;
+        border-radius: 1rem;
+        cursor: pointer;
+    }
+
+    span.close {
+         
     }
 
     footer {
@@ -769,7 +841,7 @@ img[alt="The Game Hub Logo."] {
         border-radius: 2rem;
         border: none;
 
-        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        background: #FFF700;
         -webkit-background-clip: text; /* Apply background-clip to text */
         color: transparent; /* Make the text color transparent */
     }
@@ -795,15 +867,24 @@ img[alt="The Game Hub Logo."] {
     }
 
     div#cart-overlay {
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         margin: auto; 
         width: 70vw;
-        height: 80vh;
+        height: 70vh;
+        overflow-y: auto;
         background-color: #000;
+        border: solid 0.2rem #FFF700;
         z-index: 5;
+    }
+
+    .flex-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-content: stretch;
     }
 
     div.hidden {
@@ -811,11 +892,26 @@ img[alt="The Game Hub Logo."] {
     }
 
     button.close {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        
+        font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Twemoji', 'Apple Color Emoji', 'Segoe UI Symbol', 'Android Emoji', 'EmojiSymbols', sans-serif;
+        font-size: 1.4rem;
         position: absolute;
         top: 1rem;
         right: 1rem;
-        width: 2rem;
-        height: 2rem;
+        width: 1.8rem;
+        height: 1.8rem;
+        color: #000;
+        background-color: #FFF700;
+        border: none;
+        border-radius: 1rem;
+        cursor: pointer;
+    }
+
+    span.close {
+         
     }
 
     footer {
@@ -901,7 +997,7 @@ img[alt="The Game Hub Logo."] {
         border-radius: 2rem;
         border: none;
 
-        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        background: #FFF700;
         -webkit-background-clip: text; /* Apply background-clip to text */
         color: transparent; /* Make the text color transparent */
     }
@@ -927,15 +1023,24 @@ img[alt="The Game Hub Logo."] {
     }
 
     div#cart-overlay {
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         margin: auto; 
         width: 50vw;
-        height: 80vh;
+        height: 70vh;
+        overflow-y: auto;
         background-color: #000;
+        border: solid 0.2rem #FFF700;
         z-index: 2;
+    }
+
+    .flex-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-content: stretch;
     }
 
     div.hidden {
@@ -943,11 +1048,26 @@ img[alt="The Game Hub Logo."] {
     }
 
     button.close {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        
+        font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Twemoji', 'Apple Color Emoji', 'Segoe UI Symbol', 'Android Emoji', 'EmojiSymbols', sans-serif;
+        font-size: 1.4rem;
         position: absolute;
         top: 1rem;
         right: 1rem;
-        width: 2rem;
-        height: 2rem;
+        width: 1.8rem;
+        height: 1.8rem;
+        color: #000;
+        background-color: #FFF700;
+        border: none;
+        border-radius: 1rem;
+        cursor: pointer;
+    }
+
+    span.close {
+         
     }
 
     footer {
@@ -1030,7 +1150,7 @@ img[alt="The Game Hub Logo."] {
         border-radius: 2rem;
         border: none;
 
-        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        background: #FFF700;
         -webkit-background-clip: text; /* Apply background-clip to text */
         color: transparent; /* Make the text color transparent */
     }
@@ -1057,15 +1177,24 @@ img[alt="The Game Hub Logo."] {
     }
 
     div#cart-overlay {
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         margin: auto; 
         width: 50vw;
-        height: 80vh;
+        height: 70vh;
+        overflow-y: auto;
         background-color: #000;
+        border: solid 0.2rem #FFF700;
         z-index: 2;
+    }
+
+    .flex-cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-content: stretch;
     }
 
     div.hidden {
@@ -1073,11 +1202,26 @@ img[alt="The Game Hub Logo."] {
     }
 
     button.close {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        
+        font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Twemoji', 'Apple Color Emoji', 'Segoe UI Symbol', 'Android Emoji', 'EmojiSymbols', sans-serif;
+        font-size: 1.4rem;
         position: absolute;
         top: 1rem;
         right: 1rem;
-        width: 2rem;
-        height: 2rem;
+        width: 1.8rem;
+        height: 1.8rem;
+        color: #000;
+        background-color: #FFF700;
+        border: none;
+        border-radius: 1rem;
+        cursor: pointer;
+    }
+
+    span.close {
+         
     }
 
     footer {

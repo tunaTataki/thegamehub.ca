@@ -46,7 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
     cartButton.addEventListener("click", function() {
         if(cartOverlay.classList.contains("hidden")) {
             cartOverlay.classList.remove("hidden");
+            cartOverlay.classList.add("flex-cart");
         } else {
+            cartOverlay.classList.remove("flex-cart"); // Order seems important here
             cartOverlay.classList.add("hidden");
         }
     });
