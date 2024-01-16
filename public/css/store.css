@@ -147,7 +147,9 @@ body {
 }
 
 #cart {
-
+    background: linear-gradient(to right, #e530e0, 20%, #281dcf, #FFF700); /* Gradient colors */
+    -webkit-background-clip: text; /* Apply background-clip to text */
+    background-clip: text;
 }
 
 input[type="checkbox"]:checked ~ #sidebarMenu {
@@ -255,6 +257,22 @@ img[alt="The Game Hub Logo."] {
 @media screen and (max-width: 300px) {
 
     /* 001 */
+
+    h1.the-game-hub {
+        font-family: "leaguegothicregular", sans-serif;
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        -webkit-background-clip: text; /* Apply background-clip to text */
+        background-clip: text;
+        color: transparent; /* Make the text color transparent */
+        z-index: 100;
+    }
 
     main {
          
@@ -407,11 +425,36 @@ img[alt="The Game Hub Logo."] {
         cursor: pointer;
     }
 
+    button.checkout {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        
+        font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Twemoji', 'Apple Color Emoji', 'Segoe UI Symbol', 'Android Emoji', 'EmojiSymbols', sans-serif;
+        font-size: 1.8rem;
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 75%;
+/*      height: 3rem; */
+        color: #000;
+        background-color: #FFF700;
+        border: none;
+        border-radius: 2rem;
+        cursor: pointer;
+    }
+
     span.close {
          
     }
 
     footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        
         font-family: "leaguegothicregular", sans-serif;
         height: 3rem; 
         text-align: end;
@@ -427,6 +470,22 @@ img[alt="The Game Hub Logo."] {
 
     main {
         
+    }
+
+    h1.the-game-hub {
+        font-family: "leaguegothicregular", sans-serif;
+        font-size: 2rem;
+        letter-spacing: 2px;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        -webkit-background-clip: text; /* Apply background-clip to text */
+        background-clip: text;
+        color: transparent; /* Make the text color transparent */
+        z-index: 100;
     }
 
     div#store-items-container {
@@ -577,11 +636,36 @@ img[alt="The Game Hub Logo."] {
         cursor: pointer;
     }
 
+    button.checkout {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        
+        font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Twemoji', 'Apple Color Emoji', 'Segoe UI Symbol', 'Android Emoji', 'EmojiSymbols', sans-serif;
+        font-size: 1.8rem;
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 75%;
+/*      height: 3rem; */
+        color: #000;
+        background-color: #FFF700;
+        border: none;
+        border-radius: 2rem;
+        cursor: pointer;
+    }
+
     span.close {
          
     }
 
     footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        
         font-family: "leaguegothicregular", sans-serif;
         height: 3rem; 
         text-align: end;
@@ -597,6 +681,22 @@ img[alt="The Game Hub Logo."] {
 
     main {
 
+    }
+
+    h1.the-game-hub {
+        font-family: "leaguegothicregular", sans-serif;
+        font-size: 2rem;
+        letter-spacing: 2px;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        -webkit-background-clip: text; /* Apply background-clip to text */
+        background-clip: text;
+        color: transparent; /* Make the text color transparent */
+        z-index: 100;
     }
 
     div#store-items-container {
@@ -746,11 +846,36 @@ img[alt="The Game Hub Logo."] {
         cursor: pointer;
     }
 
+    button.checkout {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        
+        font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Twemoji', 'Apple Color Emoji', 'Segoe UI Symbol', 'Android Emoji', 'EmojiSymbols', sans-serif;
+        font-size: 1.8rem;
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 75%;
+/*      height: 3rem; */
+        color: #000;
+        background-color: #FFF700;
+        border: none;
+        border-radius: 2rem;
+        cursor: pointer;
+    }
+
     span.close {
          
     }
 
     footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        
         font-family: "leaguegothicregular", sans-serif;
         font-size: 1rem;
         height: 3rem; 
@@ -767,6 +892,22 @@ img[alt="The Game Hub Logo."] {
 
     main {
         
+    }
+
+    h1.the-game-hub {
+        font-family: "leaguegothicregular", sans-serif;
+        font-size: 2.5rem;
+        letter-spacing: 4px;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        -webkit-background-clip: text; /* Apply background-clip to text */
+        background-clip: text;
+        color: transparent; /* Make the text color transparent */
+        z-index: 100;
     }
 
     div#store-items-container {
@@ -910,11 +1051,36 @@ img[alt="The Game Hub Logo."] {
         cursor: pointer;
     }
 
+    button.checkout {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        
+        font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Twemoji', 'Apple Color Emoji', 'Segoe UI Symbol', 'Android Emoji', 'EmojiSymbols', sans-serif;
+        font-size: 1.8rem;
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+/*      height: 3rem; */
+        color: #000;
+        background-color: #FFF700;
+        border: none;
+        border-radius: 2rem;
+        cursor: pointer;
+    }
+
     span.close {
          
     }
 
     footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        
         font-family: "leaguegothicregular", sans-serif;
         height: 3rem; 
         text-align: end;
@@ -930,6 +1096,22 @@ img[alt="The Game Hub Logo."] {
 
     main {
 
+    }
+
+    h1.the-game-hub {
+        font-family: "leaguegothicregular", sans-serif;
+        font-size: 3rem;
+        letter-spacing: 6px;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        -webkit-background-clip: text; /* Apply background-clip to text */
+        background-clip: text;
+        color: transparent; /* Make the text color transparent */
+        z-index: 100;
     }
 
     div#store-items-container {
@@ -1066,17 +1248,46 @@ img[alt="The Game Hub Logo."] {
         cursor: pointer;
     }
 
+    button.checkout {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        
+        font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Twemoji', 'Apple Color Emoji', 'Segoe UI Symbol', 'Android Emoji', 'EmojiSymbols', sans-serif;
+        font-size: 1.8rem;
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+/*      height: 3rem; */
+        color: #000;
+        background-color: #FFF700;
+        border: none;
+        border-radius: 2rem;
+        cursor: pointer;
+    }
+
     span.close {
          
     }
 
     footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: flex-end;
+        
         font-family: "leaguegothicregular", sans-serif;
         font-size: 2rem;
         height: 3rem; 
         text-align: end;
         margin-top: 1.5rem;
         color: #000;
+    }
+
+    footer > span {
+        margin-right: 4rem;
     }
 
 }
@@ -1087,6 +1298,22 @@ img[alt="The Game Hub Logo."] {
 
     main {
 
+    }
+
+    h1.the-game-hub {
+        font-family: "leaguegothicregular", sans-serif;
+        font-size: 3rem;
+        letter-spacing: 6px;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        background: linear-gradient(to right, #e530e0, 20%, #281dcf); /* Gradient colors */
+        -webkit-background-clip: text; /* Apply background-clip to text */
+        background-clip: text;
+        color: transparent; /* Make the text color transparent */
+        z-index: 100;
     }
 
     div#store-items-container {
@@ -1220,11 +1447,36 @@ img[alt="The Game Hub Logo."] {
         cursor: pointer;
     }
 
+    button.checkout {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        
+        font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Twemoji', 'Apple Color Emoji', 'Segoe UI Symbol', 'Android Emoji', 'EmojiSymbols', sans-serif;
+        font-size: 1.8rem;
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 25%;
+/*      height: 3rem; */
+        color: #000;
+        background-color: #FFF700;
+        border: none;
+        border-radius: 2rem;
+        cursor: pointer;
+    }
+
     span.close {
          
     }
 
     footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: flex-end;
+        
         font-family: "leaguegothicregular", sans-serif;
         font-size: 2rem;
         color: #000;
@@ -1232,5 +1484,9 @@ img[alt="The Game Hub Logo."] {
         height: 3rem; 
         text-align: end;
         margin-top: 1.5rem;
+    }
+
+    footer > span {
+        margin-right: 4rem;
     }
 }

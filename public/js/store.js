@@ -6,10 +6,12 @@ let cart = [];
 document.addEventListener("DOMContentLoaded", function () {
     const openSidebarMenu = document.querySelector("#openSidebarMenu");
     const overlay = document.querySelector("#overlay");
-    const addToCartButtons = document.querySelectorAll("div.add-to-cart");
+    const addToCartButtons = document.querySelectorAll("button.add-to-cart");
     const cartButton = document.querySelector("#cart");
     const cartOverlay = document.querySelector("#cart-overlay");
     const cartOverlayCloseButton = document.querySelector("button.close");
+    /* --- Stripe --- */
+    const checkoutButton = document.querySelector("button.checkout");
 
     // Close slide-menu on refresh
     if(openSidebarMenu.checked == true) {
@@ -27,18 +29,23 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Event listener for clicks on the overlay (outside the menu)
+    // Event listener for clicks on the overlay (outside the slide menu)
     overlay.addEventListener("click", function() {
         // Close the menu when clicking outside
         openSidebarMenu.checked = false;
         overlay.style.display = "none";
     });
 
+    // Loop for adding IDs to all the products
+    for(let i = 0; i < addToCartButtons.length; i++) {
+        cart.push([0, i]); // Pre-load cart array with arrays
+        addToCartButtons[i].classList.add("" + i); // Just use string template?
+    }
+
     // Event listener for adding products to cart, loop for each button on page
-    for(i = 0; i < addToCartButtons.length; i++) {
+    for(let i = 0; i < addToCartButtons.length; i++) {
         addToCartButtons[i].addEventListener("click", function() {
-            // clean up header, add sliding side menu 
-            // TODO
+            cart[i][0]++; // Array property legend: quantity, item ID
         });
     }
 
@@ -62,6 +69,23 @@ document.addEventListener("DOMContentLoaded", function () {
     if(document.cookie.length === 0) {
         window.alert("Cookies seem to be disabled.\nYour shopping cart might not work correctly.\n\nTo ensure no errors occur,\nplease enable cookies in your browser settings.\n\nThank you!"); 
     }
+
+    // Event listener for creating a Stripe checkout API call
+    checkoutButton.addEventListener("click", function() {
+        fetch("/createCheckoutSession", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ /* cart data */ }), // <-- should be comma?
+        })
+        .then(function() {
+            window.alert(" Non-network Error"); 
+        })
+        .catch(function() {
+            window.alert("Network Error.");
+        });
+    });
 });
 
 
@@ -78,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 /* 
-    fetch("/api/disabledCookies" {
+    fetch("/api/disabledCookies", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
