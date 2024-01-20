@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt");                                       // Signu
 const bodyParser = require("body-parser");                              // URL and JSON parsing
 const stripe = require("stripe")(process.env.STRIPE_TEST_SECRET_KEY);   // Payment processing
 const cookieParser = require("cookie-parser");                          // Sessions
-const expressSession = require("express-session");                      // Sessions
+const expressSession = require("express-session");                      // Sessions, yet unused
 const { v4: uuidv4 } = require("uuid");                                 // Sessions, unique signed cookie user IDs
 const { Client } = require("pg");                                       // Postgresql
 
@@ -21,8 +21,6 @@ const pgClient = new Client();
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-hello
-
 app.use(cookieParser(process.env.COOKIE_SECRET));
 // Not used as of yet
 /*
@@ -32,7 +30,6 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
         secret: process.env.COOKIE_SECRET,
     }));
 */ 
-
 app.use(express.static("public"));
 
 // GET Routes
@@ -42,7 +39,7 @@ app.get("/", function(req, res) {
     if(!userSessionCookie) { // Create session cookie
         res.cookie("User-Session", uuidv4(), {
             signed: true,
-            maxAge: 86400000,
+            maxAge: 604800000,
             secure: true,
         });
     }
@@ -63,7 +60,7 @@ app.get("/signup", function(req, res) {
     if(!userSessionCookie) { // Create session cookie
         res.cookie("User-Session", uuidv4(), {
             signed: true,
-            maxAge: 86400000,
+            maxAge: 604800000,
             secure: true,
         });
     }
@@ -84,7 +81,7 @@ app.get("/login", function(req, res) {
     if(!userSessionCookie) { // Create session cookie
         res.cookie("User-Session", uuidv4(), {
             signed: true,
-            maxAge: 86400000,
+            maxAge: 604800000,
             secure: true,
         });
     } 
@@ -105,7 +102,7 @@ app.get("/store", function(req, res) {
     if(!userSessionCookie) { // Create session cookie
         res.cookie("User-Session", uuidv4(), {
             signed: true,
-            maxAge: 86400000,
+            maxAge: 604800000,
             secure: true,
         });
     } 
@@ -128,6 +125,10 @@ app.post("/signupRequest", function(req, res) {
 
 app.post("/loginRequest", function(req, res) {
     // Database interfacing with pgClient
+});
+
+app.post("/updateCart", function(req, res) {
+    console.log(req.body);
 });
 
 app.post("/createCheckoutSession", function(req, res) {

@@ -47,15 +47,33 @@ document.addEventListener("DOMContentLoaded", function () {
     for(let i = 0; i < addToCartButtons.length; i++) {
         addToCartButtons[i].addEventListener("click", function() {
             cart[i][0]++; // Inner arrays property legend: quantity, item ID
-            const checkmark = document.querySelectorAll(".checkmark")[i]; // Grab proper checkmark image
+
+            // Flash checkmark
+            const checkmark = document.querySelectorAll(".checkmark")[i];
             checkmark.classList.toggle("hidden");
             setTimeout(function() { checkmark.classList.toggle("hidden"); }, "500");
+
+            // API call to update server-side cart session
+            fetch("/updateCart", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ "cart": cart, }),
+            })
+            .then(function() {
+                window.alert("Server Error.\nCart Items will not be remembered through closing the browser."); 
+            })
+            .catch(function() {
+                window.alert("Network Error.");
+            });
         });
     }
 
     // Event listener for showing and hiding the cart overlay
     cartButton.addEventListener("click", function() {
         updateCartOverlay(); // Order important here?
+
         if(cartOverlay.classList.contains("hidden")) {
             cartOverlay.classList.remove("hidden");
             cartOverlay.classList.add("flex-cart");
@@ -82,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ /* cart data */ }), // <-- should be comma?
+            body: JSON.stringify({ /* cart data */ }),
         })
         .then(function() {
             window.alert(" Non-network Error"); 
@@ -105,17 +123,16 @@ document.addEventListener("DOMContentLoaded", function () {
         deleteButton.classList.add("cart-item-delete");
         deleteButton.textContent = 'Delete';
         deleteButton.addEventListener('click', function () {
-            // Remove the item from the cart array based on the product ID
-            cart = cart.filter(item => item[1] !== productId);
             // Remove the corresponding cart item element from the DOM
             cartItem.remove();
+            cart[productId][0] = 0;
         });
         cartItem.appendChild(deleteButton);
 
         return cartItem;
     }
 
-    // Used in Event Listener for opening the cart overlay
+    // Used in Event Listener for opening the cart overlay, line 58
     function updateCartOverlay() {
         const cartContent = document.querySelector("div.cart-items-container");
 
@@ -131,7 +148,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 cartContent.appendChild(cartItem);
             }
         }
-
 /*
         // Iterate through the cart array and create cart item elements
         cart.forEach(item => {
