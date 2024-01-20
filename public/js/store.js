@@ -6,6 +6,7 @@ let cart = [];
 document.addEventListener("DOMContentLoaded", function () {
     const openSidebarMenu = document.querySelector("#openSidebarMenu");
     const overlay = document.querySelector("#overlay");
+/*  const checkmark = document.querySelector("img.checkmark"); */ // Removed for now
     const addToCartButtons = document.querySelectorAll("button.add-to-cart");
     const cartButton = document.querySelector("#cart");
     const cartOverlay = document.querySelector("#cart-overlay");
@@ -36,21 +37,25 @@ document.addEventListener("DOMContentLoaded", function () {
         overlay.style.display = "none";
     });
 
-    // Loop for adding IDs to all the products
+    // Loop for adding IDs to all the products, dynamically changes with # of products
     for(let i = 0; i < addToCartButtons.length; i++) {
-        cart.push([0, i]); // Pre-load cart array with arrays
-        addToCartButtons[i].classList.add("" + i); // Just use string template?
+        cart.push([0, i]); // Pre-load cart array with arrays, product ID is added as index
+        addToCartButtons[i].classList.add("" + i); // Adding product ID as element class
     }
 
-    // Event listener for adding products to cart, loop for each button on page
+    // Event listener for adding products to cart, loop for each button on page, flash checkmark
     for(let i = 0; i < addToCartButtons.length; i++) {
         addToCartButtons[i].addEventListener("click", function() {
-            cart[i][0]++; // Array property legend: quantity, item ID
+            cart[i][0]++; // Inner arrays property legend: quantity, item ID
+            const checkmark = document.querySelectorAll(".checkmark")[i]; // Grab proper checkmark image
+            checkmark.classList.toggle("hidden");
+            setTimeout(function() { checkmark.classList.toggle("hidden"); }, "500");
         });
     }
 
     // Event listener for showing and hiding the cart overlay
     cartButton.addEventListener("click", function() {
+        updateCartOverlay(); // Order important here?
         if(cartOverlay.classList.contains("hidden")) {
             cartOverlay.classList.remove("hidden");
             cartOverlay.classList.add("flex-cart");
@@ -86,20 +91,60 @@ document.addEventListener("DOMContentLoaded", function () {
             window.alert("Network Error.");
         });
     });
+
+    // Used by "updateCartOverlay" function below
+    function createCartOverlayItem(quantity, productId) {
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-overlay-item');
+
+        const itemName = document.createElement('span');
+        itemName.textContent = `Product ID: ${productId}, Quantity: ${quantity}`;
+        cartItem.appendChild(itemName);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add("cart-item-delete");
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', function () {
+            // Remove the item from the cart array based on the product ID
+            cart = cart.filter(item => item[1] !== productId);
+            // Remove the corresponding cart item element from the DOM
+            cartItem.remove();
+        });
+        cartItem.appendChild(deleteButton);
+
+        return cartItem;
+    }
+
+    // Used in Event Listener for opening the cart overlay
+    function updateCartOverlay() {
+        const cartContent = document.querySelector("div.cart-items-container");
+
+        // Clear existing content
+        cartContent.innerHTML = '';
+
+        for(let i = 0; i < cart.length; i++) {
+            if(cart[i][0] > 0) {
+                const quantity = cart[i][0];
+                const productId = cart[i][1];
+
+                const cartItem = createCartOverlayItem(quantity, productId);
+                cartContent.appendChild(cartItem);
+            }
+        }
+
+/*
+        // Iterate through the cart array and create cart item elements
+        cart.forEach(item => {
+            const [quantity, productId] = item;
+            const cartItem = createCartOverlayItem(quantity, productId);
+            cartContent.appendChild(cartItem);
+        });
+*/
+    }
+
 });
 
-
-
-
-
-
-
 // The shame pit
-
-
-
-
-
 
 /* 
     fetch("/api/disabledCookies", {

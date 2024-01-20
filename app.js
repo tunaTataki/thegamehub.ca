@@ -21,6 +21,7 @@ const pgClient = new Client();
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+hello
 
 app.use(cookieParser(process.env.COOKIE_SECRET));
 // Not used as of yet

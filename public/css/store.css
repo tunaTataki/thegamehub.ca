@@ -338,11 +338,25 @@ img[alt="The Game Hub Logo."] {
     }
 
     div.button-wrapper {
+        position: relative;
         background: black; 
         width: 75%;
         height: 5rem;
         border-radius: 2rem;
         margin: 1rem;
+    }
+
+    img.checkmark.hidden {
+        display: none; 
+    }
+
+    img.checkmark { 
+        position: absolute; 
+        top: 10%;
+        left: 95%;
+        transform: translateX(-50%) translateY(-50%);
+        width: 2rem;
+        height: 2rem;
     }
 
     button.add-to-cart {
@@ -549,11 +563,25 @@ img[alt="The Game Hub Logo."] {
     }
 
     div.button-wrapper {
+        position: relative;
         background: black; 
         width: 75%;
         height: 5rem;
         border-radius: 2rem;
         margin: 1rem;
+    }
+
+    img.checkmark.hidden {
+        display: none; 
+    }
+
+    img.checkmark { 
+        position: absolute; 
+        top: 10%;
+        left: 95%;
+        transform: translateX(-50%) translateY(-50%);
+        width: 2rem;
+        height: 2rem;
     }
 
     button.add-to-cart {
@@ -759,11 +787,25 @@ img[alt="The Game Hub Logo."] {
     }
 
     div.button-wrapper {
+        position: relative;
         background: black; 
         width: 75%;
         height: 5rem;
         border-radius: 2rem;
         margin: 1rem;
+    }
+
+    img.checkmark.hidden {
+        display: none; 
+    }
+
+    img.checkmark { 
+        position: absolute; 
+        top: 10%;
+        left: 95%;
+        transform: translateX(-50%) translateY(-50%);
+        width: 2rem;
+        height: 2rem;
     }
 
     button.add-to-cart {
@@ -964,11 +1006,25 @@ img[alt="The Game Hub Logo."] {
     }
 
     div.button-wrapper {
+        position: relative;
         background: black; 
         width: 75%;
         height: 5rem;
         border-radius: 2rem;
         margin: 1rem;
+    }
+
+    img.checkmark.hidden {
+        display: none; 
+    }
+
+    img.checkmark { 
+        position: absolute; 
+        top: 10%;
+        left: 95%;
+        transform: translateX(-50%) translateY(-50%);
+        width: 2rem;
+        height: 2rem;
     }
 
     button.add-to-cart {
@@ -1161,11 +1217,25 @@ img[alt="The Game Hub Logo."] {
     }
 
     div.button-wrapper {
+        position: relative;
         background: black; 
         width: 75%;
         height: 5rem;
         border-radius: 2rem;
         margin: 1rem;
+    }
+
+    img.checkmark.hidden {
+        display: none; 
+    }
+
+    img.checkmark { 
+        position: absolute; 
+        top: 10%;
+        left: 95%;
+        transform: translateX(-50%) translateY(-50%);
+        width: 2rem;
+        height: 2rem;
     }
 
     button.add-to-cart {
@@ -1359,11 +1429,25 @@ img[alt="The Game Hub Logo."] {
     }
 
     div.button-wrapper {
+        position: relative;
         background: black; 
         width: 75%;
         height: 5rem;
         border-radius: 2rem;
         margin: 1rem;
+    }
+
+    img.checkmark.hidden {
+        display: none; 
+    }
+
+    img.checkmark { 
+        position: absolute; 
+        top: 10%;
+        left: 95%;
+        transform: translateX(-50%) translateY(-50%);
+        width: 2rem;
+        height: 2rem;
     }
 
     button.add-to-cart {
@@ -1417,12 +1501,14 @@ img[alt="The Game Hub Logo."] {
         z-index: 2;
     }
 
+/* Don't need?
     .flex-cart {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-content: stretch;
     }
+*/
 
     div.hidden {
         display: none; 
@@ -1445,6 +1531,20 @@ img[alt="The Game Hub Logo."] {
         border: none;
         border-radius: 1rem;
         cursor: pointer;
+    }
+
+    div.cart-items-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+    }
+
+    div.cart-items-container > div.cart-overlay-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
     }
 
     button.checkout {
