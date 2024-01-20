@@ -409,12 +409,14 @@ img[alt="The Game Hub Logo."] {
         z-index: 5;
     }
 
+/* Unused?
     .flex-cart {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-content: stretch;
     }
+*/
 
     div.hidden {
         display: none; 
@@ -634,12 +636,14 @@ img[alt="The Game Hub Logo."] {
         z-index: 5;
     }
 
+/* Unused?
     .flex-cart {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-content: stretch;
     }
+*/
 
     div.hidden {
         display: none; 
@@ -858,12 +862,14 @@ img[alt="The Game Hub Logo."] {
         z-index: 5;
     }
 
+/* Unused?
     .flex-cart {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-content: stretch;
     }
+*/
 
     div.hidden {
         display: none; 
@@ -1077,12 +1083,14 @@ img[alt="The Game Hub Logo."] {
         z-index: 5;
     }
 
+/* Unused?
     .flex-cart {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-content: stretch;
     }
+*/
 
     div.hidden {
         display: none; 
@@ -1288,12 +1296,14 @@ img[alt="The Game Hub Logo."] {
         z-index: 2;
     }
 
+/* Unused?
     .flex-cart {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-content: stretch;
     }
+*/
 
     div.hidden {
         display: none; 
@@ -1501,7 +1511,7 @@ img[alt="The Game Hub Logo."] {
         z-index: 2;
     }
 
-/* Don't need?
+/* Unused?
     .flex-cart {
         display: flex;
         flex-direction: column;

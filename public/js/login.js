@@ -13,7 +13,7 @@ function sanitize_inputs(email, password) {
 
 function send_to_server(data) {
 
-    fetch("http://localhost:7321/loginRequest", {
+    fetch("/loginRequest", {
         method: "POST",
         headers: {
         "Content-Type": "application/json",

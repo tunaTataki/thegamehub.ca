@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Close the menu when clicking outside
         openSidebarMenu.checked = false;
         overlay.style.display = "none";
+        cartOverlay.classList.add("hidden");
     });
 
     // Loop for adding IDs to all the products, dynamically changes with # of products
@@ -59,13 +60,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ "cart": cart, }),
+                body: JSON.stringify({ "cart": "cart string", }),
             })
-            .then(function() {
-                window.alert("Server Error.\nCart Items will not be remembered through closing the browser."); 
+            .then(response => {
+                // Check if the response is okay; if not, throw an error
+                if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                // Parse the response body as JSON and return a promise
+                return response.json();
             })
-            .catch(function() {
-                window.alert("Network Error.");
+            .then(parsedData => {
+                // Handle the parsed data from the JSON response
+                console.log(parsedData);
+            })
+            .catch(function(error) {
+                console.error("Bigg Error: ", error);
             });
         });
     }
@@ -78,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
             cartOverlay.classList.remove("hidden");
             cartOverlay.classList.add("flex-cart");
         } else {
-            cartOverlay.classList.remove("flex-cart"); // Order seems important here
+/*          cartOverlay.classList.remove("flex-cart"); */ // Unused?
             cartOverlay.classList.add("hidden");
         }
     });
@@ -158,7 +169,33 @@ document.addEventListener("DOMContentLoaded", function () {
 */
     }
 
+
 });
+
+fetch("/updatecart", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ "cart": "cart string", }),
+    })
+    .then(response => {
+        // Check if the response is okay; if not, throw an error
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // Parse the response body as JSON and return a promise
+        return response.json();
+    })
+    .then(parsedData => {
+        // Handle the parsed data from the JSON response
+        console.log(parsedData);
+    })
+    .catch(function(error) {
+        console.error("Bigg Error: ", error);
+});
+
 
 // The shame pit
 
@@ -168,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ "cookiesDisabled": "true", "page": "/store",  });
+        body: JSON.stringify({ "cookiesDisabled": "true", "page": "/store",  }),
     })
     .then(function() {
         window.alert("Cookies seem to be disabled.\nYour shopping cart might not work correctly.\n\nTo ensure no errors occur,\nplease enable cookies in your browser settings.\n\nThank you!"); 

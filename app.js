@@ -127,17 +127,21 @@ app.post("/loginRequest", function(req, res) {
     // Database interfacing with pgClient
 });
 
-app.post("/updateCart", function(req, res) {
-    console.log(req.body);
+app.post("/updatecart", function(req, res) {
+    //let obj = { "key": "value", };
+    //res.json(obj);
+    res.type("text/html");
+    res.send("<p>Hello</p>");
 });
 
 app.post("/createCheckoutSession", function(req, res) {
     // Implement
 });
 
-app.get("*", function(req, res) {
-    // Implement? Display custom 404 page
-});
+/* Catch-all route
+    app.get("*", function(req, res) {
+    });
+*/
 
 app.listen(port, function() {
     console.log("app.js running");
