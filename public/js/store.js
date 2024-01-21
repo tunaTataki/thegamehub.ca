@@ -55,12 +55,12 @@ document.addEventListener("DOMContentLoaded", function () {
             setTimeout(function() { checkmark.classList.toggle("hidden"); }, "500");
 
             // API call to update server-side cart session
-            fetch("/updateCart", {
+            fetch("/update-cart", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ "cart": "cart string", }),
+                body: JSON.stringify({ "cart": cart, }),
             })
             .then(response => {
                 // Check if the response is okay; if not, throw an error
@@ -159,60 +159,5 @@ document.addEventListener("DOMContentLoaded", function () {
                 cartContent.appendChild(cartItem);
             }
         }
-/*
-        // Iterate through the cart array and create cart item elements
-        cart.forEach(item => {
-            const [quantity, productId] = item;
-            const cartItem = createCartOverlayItem(quantity, productId);
-            cartContent.appendChild(cartItem);
-        });
-*/
     }
-
-
 });
-
-fetch("/updatecart", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ "cart": "cart string", }),
-    })
-    .then(response => {
-        // Check if the response is okay; if not, throw an error
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        // Parse the response body as JSON and return a promise
-        return response.json();
-    })
-    .then(parsedData => {
-        // Handle the parsed data from the JSON response
-        console.log(parsedData);
-    })
-    .catch(function(error) {
-        console.error("Bigg Error: ", error);
-});
-
-
-// The shame pit
-
-/* 
-    fetch("/api/disabledCookies", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ "cookiesDisabled": "true", "page": "/store",  }),
-    })
-    .then(function() {
-        window.alert("Cookies seem to be disabled.\nYour shopping cart might not work correctly.\n\nTo ensure no errors occur,\nplease enable cookies in your browser settings.\n\nThank you!"); 
-    })
-    .catch(function() {
-        window.alert("Network Error.");
-    });
-
-}
-*/

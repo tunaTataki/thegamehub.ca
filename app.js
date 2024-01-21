@@ -11,7 +11,6 @@ const cookieParser = require("cookie-parser");                          // Sessi
 const expressSession = require("express-session");                      // Sessions, yet unused
 const { v4: uuidv4 } = require("uuid");                                 // Sessions, unique signed cookie user IDs
 const { Client } = require("pg");                                       // Postgresql
-
 // Our .env entires may need to be quoted differently
 
 const app = express();
@@ -22,7 +21,6 @@ const pgClient = new Client();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
-// Not used as of yet
 /*
     app.use(expressSession({
         resave: false,
@@ -31,6 +29,43 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
     }));
 */ 
 app.use(express.static("public"));
+
+// Async function for pgClient, experimental
+async function fetchData() {
+    await pgClient.connect();
+
+    try {
+        let result = await pgClient.query("SELECT datname FROM pg_database;");
+        console.log(result.rows);
+    } finally {
+        await pgClient.end();
+    }
+    return result;
+}
+
+// POST Routes
+app.post("/update-cart", async function(req, res) {
+    //let obj = { "key": "weenis!", };
+    //res.json(obj);
+
+    // pgClient, store cookie ID & cart info 
+    const userSessionCookie = req.signedCookies["User-Session"];
+    const cart = req.body.cart;
+
+    res.json(fetchData());
+});
+app.post("/signup-request", function requestHandler(req, res) {
+    let obj = { "key": "/signupRequest works!", };
+    res.json(obj);
+});                                                
+
+app.post("/login-request", function(req, res) {
+    // Database interfacing with pgClient
+});
+
+app.post("/create-checkout-session", function(req, res) {
+    // Implement
+});
 
 // GET Routes
 app.get("/", function(req, res) {
@@ -116,27 +151,6 @@ app.get("/store", function(req, res) {
 
     res.sendFile(path.join(__dirname, "views", "store.html"));
 });                                                
-
-// POST Routes
-app.post("/signupRequest", function(req, res) {
-    const requestBody = req.body;
-    // Database interfacing with pgClient
-});                                                
-
-app.post("/loginRequest", function(req, res) {
-    // Database interfacing with pgClient
-});
-
-app.post("/updatecart", function(req, res) {
-    //let obj = { "key": "value", };
-    //res.json(obj);
-    res.type("text/html");
-    res.send("<p>Hello</p>");
-});
-
-app.post("/createCheckoutSession", function(req, res) {
-    // Implement
-});
 
 /* Catch-all route
     app.get("*", function(req, res) {
