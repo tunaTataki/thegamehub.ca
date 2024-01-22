@@ -15,45 +15,41 @@ const { Client } = require("pg");                                       // Postg
 
 const app = express();
 const port = process.env.PORT;
-const pgClient = new Client();
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
-/*
-    app.use(expressSession({
-        resave: false,
-        saveUninitialized: false,
-        secret: process.env.COOKIE_SECRET,
-    }));
-*/ 
 app.use(express.static("public"));
 
-// Async function for pgClient, experimental
-async function fetchData() {
-    await pgClient.connect();
-
-    try {
-        let result = await pgClient.query("SELECT datname FROM pg_database;");
-        console.log(result.rows);
-    } finally {
-        await pgClient.end();
-    }
-    return result;
-}
-
 // POST Routes
-app.post("/update-cart", async function(req, res) {
-    //let obj = { "key": "weenis!", };
-    //res.json(obj);
+app.post("/update-cart", function(req, res) {
 
-    // pgClient, store cookie ID & cart info 
-    const userSessionCookie = req.signedCookies["User-Session"];
-    const cart = req.body.cart;
+    // User ID cookie & cart info 
+    const user_id = req.signedCookies["User-Session"];
+    const cart_contents = JSON.stringify(req.body.cart);
 
-    res.json(fetchData());
+    // Postgresql
+    const pgClient = new Client();
+
+    pgClient.connect()
+        .then(function() {
+            return pgClient.query('INSERT INTO user_carts (user_id, cart_contents) VALUES ($1, $2) ' +
+                                  'ON CONFLICT (user_id) DO UPDATE SET cart_contents = EXCLUDED.cart_contents ' +
+                                  'RETURNING *;', [user_id, cart_contents]);
+        })
+        .then(function(queryResult) {
+            const resultRows = queryResult.rows;
+            res.json({"Result: ": resultRows,});
+        })
+        .catch(function(error) {
+            res.json({"Result: ": cart_contents,});
+        })
+        .finally(function() {
+            pgClient.end();
+    });
 });
+
 app.post("/signup-request", function requestHandler(req, res) {
     let obj = { "key": "/signupRequest works!", };
     res.json(obj);
