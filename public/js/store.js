@@ -161,3 +161,22 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
+
+// Send request to /check-cart, fetch existing cart for unique user
+fetch("/check-cart", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(cart), // Unused in /check-cart
+})
+.then(function(res) {
+    return res.json();
+})
+.then(function(data) {
+    console.log(data);
+    cart = data.cart_contents;
+})
+.catch(function(error) {
+    console.error(error);
+});

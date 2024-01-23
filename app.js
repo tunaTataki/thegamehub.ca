@@ -23,6 +23,33 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.static("public"));
 
 // POST Routes
+
+app.post("/check-cart", function(req, res) {
+    // Check if user has existing cart storage
+    const user_id = req.signedCookies["User-Session"];
+    
+    // Postgresql
+    const pgClient = new Client();
+
+    pgClient.connect()
+        .then(function() {
+            return pgClient.query('SELECT * FROM user_carts WHERE user_id = $1;', [user_id]);
+        })
+        .then(function(queryResult) {
+            if(queryResult.rows.length > 0) {
+                res.json(queryResult.rows[0]); 
+            } else {
+                res.json({ "Result: ": "No matching rows.", });
+            }
+        })
+        .catch(function(error) {
+            res.json({ "Result: ": "/check-cart error.", });
+        })
+        .finally(function() {
+            pgClient.end();
+    });
+});
+
 app.post("/update-cart", function(req, res) {
 
     // User ID cookie & cart info 
@@ -40,10 +67,10 @@ app.post("/update-cart", function(req, res) {
         })
         .then(function(queryResult) {
             const resultRows = queryResult.rows;
-            res.json({"Result: ": resultRows,});
+            res.json({ "Result: ": resultRows, });
         })
         .catch(function(error) {
-            res.json({"Result: ": cart_contents,});
+            res.json({ "Result: ": cart_contents, });
         })
         .finally(function() {
             pgClient.end();
