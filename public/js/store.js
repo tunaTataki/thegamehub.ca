@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
             setTimeout(function() { checkmark.classList.toggle("hidden"); }, "500");
 
             // API call to update server-side cart session
-            fetch("/update-cart", {
+            fetch("/push-cart", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(response => {
                 // Check if the response is okay; if not, throw an error
                 if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
 
                 // Parse the response body as JSON and return a promise
@@ -133,17 +133,42 @@ document.addEventListener("DOMContentLoaded", function () {
         const deleteButton = document.createElement('button');
         deleteButton.classList.add("cart-item-delete");
         deleteButton.textContent = 'Delete';
-        deleteButton.addEventListener('click', function () {
+        deleteButton.addEventListener('click', function() {
             // Remove the corresponding cart item element from the DOM
             cartItem.remove();
-            cart[productId][0] = 0;
+            cart[productId][0] = 0; // Can the event listener see this variable?
+
+            // Sync database cart when cart items are deleted
+            fetch("/push-cart", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ "cart": cart, }),
+            })
+            .then(function(res) {
+                // Check if the response is okay; if not, throw an error
+                if (!res.ok) {
+                    throw new Error(`HTTP error! Status: ${res.status}`);
+                }
+
+                // Parse the response body as JSON and return a promise
+                return res.json();
+            })
+            .then(function(parsedData) {
+                // Handle the parsed data from the JSON response
+                console.log(parsedData);
+            })
+            .catch(function(error) {
+                console.error("Bigg Error: ", error);
+            });
         });
         cartItem.appendChild(deleteButton);
 
         return cartItem;
     }
 
-    // Used in Event Listener for opening the cart overlay, line 58
+    // Used in Event Listener for opening the cart overlay
     function updateCartOverlay() {
         const cartContent = document.querySelector("div.cart-items-container");
 
@@ -162,20 +187,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// Send request to /check-cart, fetch existing cart for unique user
-fetch("/check-cart", {
+// Send request to /pull-cart, fetch existing cart for unique user
+fetch("/pull-cart", {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
     },
-    body: JSON.stringify(cart), // Unused in /check-cart
+    body: JSON.stringify(cart), // Unused in /pull-cart
 })
 .then(function(res) {
     return res.json();
 })
 .then(function(data) {
     console.log(data);
-    cart = data.cart_contents;
+
+    if(!data.hasOwnProperty("POST /pull-cart then(): ")) { // Row matched
+        console.log(data.cart_contents); // Print user cart
+        cart = data.cart_contents;
+    }
 })
 .catch(function(error) {
     console.error(error);

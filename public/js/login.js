@@ -20,7 +20,7 @@ function send_to_server(data) {
         },
         body: JSON.stringify(data),
     })
-    .then(response => {
+    .then(function(response) {
 
         // Check if the response is okay; if not, throw an error
         if (!response.ok) {
@@ -30,12 +30,12 @@ function send_to_server(data) {
         // Parse the response body as JSON and return a promise
         return response.json();
     })
-    .then(parsedData => {
+    .then(function(parsedData) {
 
         // Handle the parsed data from the JSON response
         console.log(parsedData);
     })
-    .catch(error => {
+    .catch(function(error) {
 
         // Handle any errors that occurred during the fetch operation
         console.error('Error:', error);

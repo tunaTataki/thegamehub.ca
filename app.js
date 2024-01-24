@@ -23,8 +23,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.static("public"));
 
 // POST Routes
-
-app.post("/check-cart", function(req, res) {
+app.post("/pull-cart", function(req, res) { // store.js auto check fetch()
     // Check if user has existing cart storage
     const user_id = req.signedCookies["User-Session"];
     
@@ -39,18 +38,18 @@ app.post("/check-cart", function(req, res) {
             if(queryResult.rows.length > 0) {
                 res.json(queryResult.rows[0]); 
             } else {
-                res.json({ "Result: ": "No matching rows.", });
+                res.json({ "POST /pull-cart then(): ": "No matching user_id", });
             }
         })
         .catch(function(error) {
-            res.json({ "Result: ": "/check-cart error.", });
+            res.json({ "POST /pull-cart catch(): ": "Error, catch()", });
         })
         .finally(function() {
             pgClient.end();
     });
 });
 
-app.post("/update-cart", function(req, res) {
+app.post("/push-cart", function(req, res) { // Add-to-cart button fetch(), cart overlay delete button fetch()
 
     // User ID cookie & cart info 
     const user_id = req.signedCookies["User-Session"];
@@ -67,10 +66,10 @@ app.post("/update-cart", function(req, res) {
         })
         .then(function(queryResult) {
             const resultRows = queryResult.rows;
-            res.json({ "Result: ": resultRows, });
+            res.json({ "POST /push-cart then(), Updated DB row: ": resultRows, });
         })
         .catch(function(error) {
-            res.json({ "Result: ": cart_contents, });
+            res.json({ "POST /push-cart catch(): ": cart_contents, });
         })
         .finally(function() {
             pgClient.end();
@@ -78,12 +77,11 @@ app.post("/update-cart", function(req, res) {
 });
 
 app.post("/signup-request", function requestHandler(req, res) {
-    let obj = { "key": "/signupRequest works!", };
-    res.json(obj);
+    // signup.js makes fetch() request to this route inside button click event listener
 });                                                
 
 app.post("/login-request", function(req, res) {
-    // Database interfacing with pgClient
+    // login.js makes fetch() request to this route inside button click event listener
 });
 
 app.post("/create-checkout-session", function(req, res) {
@@ -100,14 +98,14 @@ app.get("/", function(req, res) {
             maxAge: 604800000,
             secure: true,
         });
+    } else {
+        // Refresh cookie expiry, new cookie with same unique UID
+        res.cookie("User-Session", userSessionCookie, {
+            signed: true,
+            maxAge: 604800000,
+            secure: true,
+        });
     }
-
-/* This is somehow creating 502 bad gateway errors. No clue why, possibly due to the synchronicity? IDK man.
-        fs.appendFileSync("logs/cookie-logs", new Date() + ": --- A cookie was created in the / GET route. ---\n\n"); // Log new session cookie, double newline delimiters
-    else {
-        fs.appendFileSync("/var/www/html/bytebloom.tech/express/logs/cookie-logs", new Date() + ": --- Existing cookie in /store GET route. ---\n" + userSessionCookie + "\n\n"); // Log existing session cookie
-    }
-*/
 
     res.sendFile(path.join(__dirname, "views", "index.html"));
 });                                                
@@ -121,14 +119,14 @@ app.get("/signup", function(req, res) {
             maxAge: 604800000,
             secure: true,
         });
-    }
-
-/* This is somehow creating 502 bad gateway errors. No clue why, possibly due to the synchronicity? IDK man.
-        fs.appendFileSync("logs/cookie-logs", new Date() + ": --- A cookie was created in the /signup GET route. ---\n\n"); // Log new session cookie, double newline delimiters
     } else {
-        fs.appendFileSync("logs/cookie-logs", new Date() + ": --- Existing cookie in /signup GET route. ---\n" + userSessionCookie + "\n\n"); // Log existing session cookie
+        // Refresh cookie expiry, new cookie with same unique UID
+        res.cookie("User-Session", userSessionCookie, {
+            signed: true,
+            maxAge: 604800000,
+            secure: true,
+        });
     }
-*/
 
     res.sendFile(path.join(__dirname, "views", "signup.html"));
 });                                                
@@ -142,14 +140,14 @@ app.get("/login", function(req, res) {
             maxAge: 604800000,
             secure: true,
         });
-    } 
-    
-/* This is somehow creating 502 bad gateway errors. No clue why, possibly due to the synchronicity? IDK man.
-        fs.appendFileSync("logs/cookie-logs", new Date() + ": --- A cookie was created in the /login GET route. ---\n\n"); // Log new session cookie, double newline delimiters
-    else {
-        fs.appendFileSync("/var/www/html/bytebloom.tech/express/logs/cookie-logs", new Date() + ": --- Existing cookie in /login GET route. ---\n" + userSessionCookie + "\n\n"); // Log existing session cookie
+    } else {
+        // Refresh cookie expiry, new cookie with same unique UID
+        res.cookie("User-Session", userSessionCookie, {
+            signed: true,
+            maxAge: 604800000,
+            secure: true,
+        });
     }
-*/
 
     res.sendFile(path.join(__dirname, "views", "login.html"));
 });                                                
@@ -163,17 +161,17 @@ app.get("/store", function(req, res) {
             maxAge: 604800000,
             secure: true,
         });
-    } 
-    
-/* This is somehow creating 502 bad gateway errors. No clue why, possibly due to the synchronicity? IDK man.
-        fs.appendFileSync("/var/www/html/bytebloom.tech/express/logs/cookie-logs", new Date() + ": --- A cookie was created in the /store GET route. ---\n\n"); // Log new session cookie, double newline delimiters
-    else {
-        fs.appendFileSync("/var/www/html/bytebloom.tech/express/logs/cookie-logs", new Date() + ": --- Existing cookie in /store GET route. ---\n" + userSessionCookie + "\n\n"); // Log existing session cookie
+    } else {
+        // Refresh cookie expiry, new cookie with same unique UID
+        res.cookie("User-Session", userSessionCookie, {
+            signed: true,
+            maxAge: 604800000,
+            secure: true,
+        });
     }
-*/
-
+    
     res.sendFile(path.join(__dirname, "views", "store.html"));
-});                                                
+}); 
 
 /* Catch-all route
     app.get("*", function(req, res) {
@@ -181,5 +179,11 @@ app.get("/store", function(req, res) {
 */
 
 app.listen(port, function() {
-    console.log("app.js running");
+    // console.log("app.js running");
 });
+
+(function() {
+    setInterval(function() {
+        
+    }, 604800000);
+})();
