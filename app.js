@@ -11,6 +11,7 @@ const cookieParser = require("cookie-parser");                          // Sessi
 const expressSession = require("express-session");                      // Sessions, yet unused
 const { v4: uuidv4 } = require("uuid");                                 // Sessions, unique signed cookie user IDs
 const { Client } = require("pg");                                       // Postgresql
+const cron = require("node-cron");                                      // Clear old carts from database
 // Our .env entires may need to be quoted differently
 
 const app = express();
@@ -95,14 +96,14 @@ app.get("/", function(req, res) {
     if(!userSessionCookie) { // Create session cookie
         res.cookie("User-Session", uuidv4(), {
             signed: true,
-            maxAge: 604800000,
+            maxAge: 2629746000,
             secure: true,
         });
     } else {
         // Refresh cookie expiry, new cookie with same unique UID
         res.cookie("User-Session", userSessionCookie, {
             signed: true,
-            maxAge: 604800000,
+            maxAge: 2629746000,
             secure: true,
         });
     }
@@ -116,14 +117,14 @@ app.get("/signup", function(req, res) {
     if(!userSessionCookie) { // Create session cookie
         res.cookie("User-Session", uuidv4(), {
             signed: true,
-            maxAge: 604800000,
+            maxAge: 2629746000,
             secure: true,
         });
     } else {
         // Refresh cookie expiry, new cookie with same unique UID
         res.cookie("User-Session", userSessionCookie, {
             signed: true,
-            maxAge: 604800000,
+            maxAge: 2629746000,
             secure: true,
         });
     }
@@ -137,14 +138,14 @@ app.get("/login", function(req, res) {
     if(!userSessionCookie) { // Create session cookie
         res.cookie("User-Session", uuidv4(), {
             signed: true,
-            maxAge: 604800000,
+            maxAge: 2629746000,
             secure: true,
         });
     } else {
         // Refresh cookie expiry, new cookie with same unique UID
         res.cookie("User-Session", userSessionCookie, {
             signed: true,
-            maxAge: 604800000,
+            maxAge: 2629746000,
             secure: true,
         });
     }
@@ -158,14 +159,14 @@ app.get("/store", function(req, res) {
     if(!userSessionCookie) { // Create session cookie
         res.cookie("User-Session", uuidv4(), {
             signed: true,
-            maxAge: 604800000,
+            maxAge: 2629746000,
             secure: true,
         });
     } else {
         // Refresh cookie expiry, new cookie with same unique UID
         res.cookie("User-Session", userSessionCookie, {
             signed: true,
-            maxAge: 604800000,
+            maxAge: 2629746000,
             secure: true,
         });
     }
@@ -178,12 +179,42 @@ app.get("/store", function(req, res) {
     });
 */
 
+// Function to delete old rows from user_carts table
+async function deleteOldCarts() {
+    try {
+        const pgClient = new Client();
+        await pgClient.connect();
+
+        // Calculate the date one month ago
+        const oneMonthAgo = new Date();
+        oneMonthAgo.setHours(oneMonthAgo.getHours() - 720); // 30 days * 24 hours
+
+        // Fetch rows to be deleted
+        const fetchResult = await pgClient.query('SELECT * FROM user_carts WHERE creation_date < $1;', [oneMonthAgo]);
+        const rowsToDelete = fetchResult.rows;
+
+        // Execute the delete query
+        const deleteResult = await pgClient.query('DELETE FROM user_carts WHERE creation_date < $1;', [oneMonthAgo]);
+        await fs.appendFile("./logs/user_carts_deletion_record", `Deleted ${deleteResult.rowCount} rows one month old at ${new Date()}\n`);
+
+        // Log the details of deleted rows to file
+        if (rowsToDelete.length > 0) {
+            await fs.appendFile(
+                "logs/user_carts_deletion_record",
+                `Details of deleted rows:\n${JSON.stringify(rowsToDelete, null, 4)}\n`
+            );
+        }
+    } catch (error) {
+        await fs.appendFile("logs/user_carts_deletion_record", `Error deleting rows: ${error.message} at ${new Date()}\n`);
+    } finally {
+        await pgClient.end();
+        await fs.appendFile("./logs/user_carts_deletion_record", `deleteOldCarts() ran at ${new Date()}\n`);
+    }
+}
+
+// Schedule deleteOldCarts() to run every day at midnight
+cron.schedule("0 0 * * *", deleteOldCarts);
+
 app.listen(port, function() {
     // console.log("app.js running");
 });
-
-(function() {
-    setInterval(function() {
-        
-    }, 604800000);
-})();
