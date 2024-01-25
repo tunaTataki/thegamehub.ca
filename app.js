@@ -23,7 +23,45 @@ app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.static("public"));
 
+// Stripe API call functions
+// async function stripePricesListAPICall {
+//     let obj = {};
+//     
+//     try {
+//         const stripePrices = await stripe.prices.list({ limit: 100 });
+//         obj.stripePrices = stripePrices;
+//     } catch (error) {
+//         obj.stripePrices = { "error": "Error fetching Stripe prices" };
+//     }
+// 
+//     return obj;
+// }
+// 
+// async function stripeProductsListAPICall {
+//     let obj = {};
+//     
+//     try {
+//         const stripeProducts = await stripe.products.list({ limit: 100 });
+//         obj.stripeProducts = stripeProducts;
+//     } catch (error) {
+//         obj.stripeProducts = { "error": "Error fetching Stripe products" };
+//     }
+// 
+//     return obj;
+// }
+
 async function stripeAPICalls() {
+
+     // let obj = {};
+     // 
+     // let prices = stripePricesListAPICall(); 
+     // let products = stripeProductsListAPICall();
+     // 
+     // obj.stripePrices = prices.stripePrices;
+     // obj.stripeProducts = products.stripeProducts;
+     // 
+     // return obj;
+     
     let obj = {};
 
     try {
@@ -46,6 +84,43 @@ async function stripeAPICalls() {
 }
 
 // POST Routes
+app.post("/create-checkout-session", async function(req, res) { // WIP
+    const user_id = req.signedCookies["User-Session"];
+    const finalCart = {};
+    const pgClient = new Client();
+
+    let proceed = 0; // This is lame
+
+    try {
+        await pgClient.connect();
+        const queryResult = await pgClient.query('SELECT * FROM user_carts WHERE user_id = $1;', [user_id]);
+
+        if(queryResult.rows.length > 0) {
+            finalCart = queryResult.rows[0].cart_contents;
+            proceed = 1;
+        } else {
+            res.json({ "Error: ": "In else clause of \"/create-checkout-session\", query failed to fetch customer's cart row", });
+        }
+    } catch {
+        res.json({ "Error: ": "In catch clause of \"/create-checkout-session\", database connection failed", });
+    } finally {
+        pgClient.end();
+
+        if(proceed === 1) {
+            // Stripe checkout API call
+            const stripePriceList = await stripe.prices.list({ limit: 100 });
+
+            // Loop through cart array, build object that Stripe wants?
+            // for(...
+ 
+            const session = await stripe.checkout.sessions.create({
+                ui_mode: "embedded",
+                // ...
+            });
+        }
+    }
+});
+
 app.post("/pull-cart", async function(req, res) { // store.js, stripe & postgres
     // Check if user has existing cart storage
     const user_id = req.signedCookies["User-Session"];
@@ -60,7 +135,7 @@ app.post("/pull-cart", async function(req, res) { // store.js, stripe & postgres
         await pgClient.connect();
         const queryResult = await pgClient.query('SELECT * FROM user_carts WHERE user_id = $1;', [user_id]);
 
-        if (queryResult.rows.length > 0) {
+        if(queryResult.rows.length > 0) {
             finalResponse.postgresResult = queryResult.rows[0];
         } else {
             finalResponse.postgresResult = { "POST /pull-cart: ": "No matching user_id, in else clause" };
@@ -89,8 +164,8 @@ app.post("/push-cart", function(req, res) { // Add-to-cart button fetch(), cart 
                                   'RETURNING *;', [user_id, cart_contents]);
         })
         .then(function(queryResult) {
-            const resultRows = queryResult.rows;
-            res.json({ "POST /push-cart then(), Updated DB row: ": resultRows, });
+            const resultRow = queryResult.rows[0];
+            res.json({ "POST /push-cart then(), Updated DB row: ": resultRow, });
         })
         .catch(function(error) {
             res.json({ "POST /push-cart catch(): ": cart_contents, });
@@ -106,10 +181,6 @@ app.post("/signup-request", function requestHandler(req, res) {
 
 app.post("/login-request", function(req, res) {
     // login.js makes fetch() request to this route inside button click event listener
-});
-
-app.post("/create-checkout-session", function(req, res) {
-    // Implement
 });
 
 // GET Routes
@@ -221,7 +292,7 @@ async function deleteOldCarts() {
         await fs.appendFile("./logs/user_carts_deletion_record", `Deleted ${deleteResult.rowCount} rows one month old at ${new Date()}\n`);
 
         // Log the details of deleted rows to file
-        if (rowsToDelete.length > 0) {
+        if(rowsToDelete.length > 0) {
             await fs.appendFile(
                 "logs/user_carts_deletion_record",
                 `Details of deleted rows:\n${JSON.stringify(rowsToDelete, null, 4)}\n`

@@ -118,12 +118,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Event listener for creating a Stripe checkout API call
     checkoutButton.addEventListener("click", function() {
-        fetch("/createCheckoutSession", {
+        fetch("/create-checkout-session", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ /* cart data */ }),
+            body: JSON.stringify({ /* unused */ }),
         })
         .then(function() {
             window.alert(" Non-network Error"); 
@@ -210,7 +210,7 @@ fetch("/pull-cart", {
 .then(function(res) {
     return res.json();
 })
-.then(function(data) { // The magic
+.then(function(data) { // The magic, populate store products with live data from Stripe's dashboard
     console.log(data);
 
     // Postgresql query check
@@ -230,9 +230,10 @@ fetch("/pull-cart", {
         let prices = document.querySelectorAll("h3.item-price");
         let descriptions = document.querySelectorAll("p.item-description");
 
+        // This needs to be re-written to generate whole store items
         for(let i = 0; i < data.stripeProducts.data.length; i++) {
             images[i].src = data.stripeProducts.data[i].images[0];
-            titles[i].textContent = data.stripeProducts.data[i].name; // Don't need template?
+            titles[i].textContent = data.stripeProducts.data[i].name;
             const dollars = centsToDollars(data.stripePrices.data[i].unit_amount);
             prices[i].textContent = `CAD $ ${dollars}`; // centsToDollars only accepts a number
             descriptions[i].textContent = data.stripeProducts.data[i].description;
