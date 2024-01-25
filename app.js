@@ -23,31 +23,54 @@ app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.static("public"));
 
+async function stripeAPICalls() {
+    let obj = {};
+
+    try {
+        // First API call
+        const stripePrices = await stripe.prices.list({ limit: 100 });
+        obj.stripePrices = stripePrices;
+    } catch (error) {
+        obj.stripePrices = { "error": "Error fetching Stripe prices" };
+    }
+
+    try {
+        // Second API call
+        const stripeProducts = await stripe.products.list({ limit: 100 });
+        obj.stripeProducts = stripeProducts;
+    } catch (error) {
+        obj.stripeProducts = { "error": "Error fetching Stripe products" };
+    }
+
+    return obj;
+}
+
 // POST Routes
-app.post("/pull-cart", function(req, res) { // store.js auto check fetch()
+app.post("/pull-cart", async function(req, res) { // store.js, stripe & postgres
     // Check if user has existing cart storage
     const user_id = req.signedCookies["User-Session"];
+
+    // Stripe
+    const finalResponse = await stripeAPICalls();
     
     // Postgresql
     const pgClient = new Client();
 
-    pgClient.connect()
-        .then(function() {
-            return pgClient.query('SELECT * FROM user_carts WHERE user_id = $1;', [user_id]);
-        })
-        .then(function(queryResult) {
-            if(queryResult.rows.length > 0) {
-                res.json(queryResult.rows[0]); 
-            } else {
-                res.json({ "POST /pull-cart then(): ": "No matching user_id", });
-            }
-        })
-        .catch(function(error) {
-            res.json({ "POST /pull-cart catch(): ": "Error, catch()", });
-        })
-        .finally(function() {
-            pgClient.end();
-    });
+    try {
+        await pgClient.connect();
+        const queryResult = await pgClient.query('SELECT * FROM user_carts WHERE user_id = $1;', [user_id]);
+
+        if (queryResult.rows.length > 0) {
+            finalResponse.postgresResult = queryResult.rows[0];
+        } else {
+            finalResponse.postgresResult = { "POST /pull-cart: ": "No matching user_id, in else clause" };
+        }
+    } catch (error) {
+        finalResponse.postgresResult = { "POST /pull-cart: ": "Error, in catch" };
+    } finally {
+        pgClient.end();
+        res.json(finalResponse);
+    }
 });
 
 app.post("/push-cart", function(req, res) { // Add-to-cart button fetch(), cart overlay delete button fetch()

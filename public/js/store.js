@@ -3,6 +3,18 @@
 // Cart items
 let cart = [];
 
+function centsToDollars(cents) {
+// Make sure that cents is a number
+    if (typeof cents !== 'number') {
+        throw new Error('Input must be a number representing cents.');
+    }
+
+    // Convert cents to dollars and round to two decimal places
+    const dollars = (cents / 100).toFixed(2);
+
+    return dollars;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const openSidebarMenu = document.querySelector("#openSidebarMenu");
     const overlay = document.querySelector("#overlay");
@@ -187,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// Send request to /pull-cart, fetch existing cart for unique user
+// Send request to /pull-cart, fetch existing cart for unique user, also pulls items
 fetch("/pull-cart", {
     method: "POST",
     headers: {
@@ -198,14 +210,38 @@ fetch("/pull-cart", {
 .then(function(res) {
     return res.json();
 })
-.then(function(data) {
+.then(function(data) { // The magic
     console.log(data);
 
-    if(!data.hasOwnProperty("POST /pull-cart then(): ")) { // Row matched
-        console.log(data.cart_contents); // Print user cart
-        cart = data.cart_contents;
+    // Postgresql query check
+    if(!data.postgresResult.hasOwnProperty("POST /pull-cart: ")) { // Row matched
+        cart = data.postgresResult.cart_contents;
+    } else {
+        console.log(data.postgresResult);
+    }
+
+    // Stripe API call check
+    if(!data.stripeProducts.hasOwnProperty("error") && !data.stripePrices.hasOwnProperty("error")) {
+        // Successful API calls
+
+        // Arrays of elements to substitute
+        let images = document.querySelectorAll("img.item-image");
+        let titles = document.querySelectorAll("h2.item-title");
+        let prices = document.querySelectorAll("h3.item-price");
+        let descriptions = document.querySelectorAll("p.item-description");
+
+        for(let i = 0; i < data.stripeProducts.data.length; i++) {
+            images[i].src = data.stripeProducts.data[i].images[0];
+            titles[i].textContent = data.stripeProducts.data[i].name; // Don't need template?
+            const dollars = centsToDollars(data.stripePrices.data[i].unit_amount);
+            prices[i].textContent = `CAD $ ${dollars}`; // centsToDollars only accepts a number
+            descriptions[i].textContent = data.stripeProducts.data[i].description;
+        }
+    } else {
+        // Unsuccessful API calls
+        console.log(`Logged from else clause of API call check, in fetch(\"pull-cart\"), stripePrices & stripeProducts:\n${data.stripePrices}\n${data.stripeProducts}`);
     }
 })
 .catch(function(error) {
-    console.error(error);
+    console.error(`Logged from .catch() in fetch(\"/pull-cart\"), error: ${error}`);
 });
