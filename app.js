@@ -115,6 +115,15 @@ app.post("/create-checkout-session", async function(req, res) { // WIP
  
             const session = await stripe.checkout.sessions.create({
                 ui_mode: "embedded",
+                return_url: "https://bytebloom.tech/store",
+                // cancel_url: "",
+                mode: "payment",
+                line_items: [
+                    {
+                        
+                    },
+                ],
+                
                 // ...
             });
         }
