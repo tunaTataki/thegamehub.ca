@@ -83,50 +83,54 @@ async function stripeAPICalls() {
     return obj;
 }
 
+async function createStripeSession(finalCart, databaseCart, res) {
+    try {
+        const stripePriceList = await stripe.prices.list({ limit: 100 });
+
+        for (let i = 0, j = 0; i < databaseCart.length; i++) {
+            if (databaseCart[i][0] > 0) {
+                finalCart[j] = { price: stripePriceList.data[i].id, quantity: databaseCart[i][0] };
+                j++;
+            }
+        }
+
+        const session = await stripe.checkout.sessions.create({
+            success_url: "https://bytebloom.tech/store",
+            cancel_url: "https://bytebloom.tech/store",
+            line_items: finalCart,
+            mode: "payment",
+            // automatic_tax: { enabled: true },
+        });
+
+        res.redirect(303, session.url);
+    } catch (error) {
+        res.status(500).json({ error: "Error creating Stripe session" });
+    }
+}
+
 // POST Routes
 app.post("/create-checkout-session", async function(req, res) { // WIP
     const user_id = req.signedCookies["User-Session"];
-    const finalCart = {};
     const pgClient = new Client();
+    let databaseCart = [];
+    let finalCart = [];
 
-    let proceed = 0; // This is lame
+    // let proceed = 0; // This is lame
 
     try {
         await pgClient.connect();
         const queryResult = await pgClient.query('SELECT * FROM user_carts WHERE user_id = $1;', [user_id]);
 
         if(queryResult.rows.length > 0) {
-            finalCart = queryResult.rows[0].cart_contents;
-            proceed = 1;
+            databaseCart = queryResult.rows[0].cart_contents; // The array
+            await createStripeSession(finalCart, databaseCart, res);
         } else {
-            res.json({ "Error: ": "In else clause of \"/create-checkout-session\", query failed to fetch customer's cart row", });
+            res.status(404).json({ error: "User's cart not found", });
         }
-    } catch {
-        res.json({ "Error: ": "In catch clause of \"/create-checkout-session\", database connection failed", });
+    } catch (error) {
+        res.status(500).json({ error: "Database connection error", });
     } finally {
         pgClient.end();
-
-        if(proceed === 1) {
-            // Stripe checkout API call
-            const stripePriceList = await stripe.prices.list({ limit: 100 });
-
-            // Loop through cart array, build object that Stripe wants?
-            // for(...
- 
-            const session = await stripe.checkout.sessions.create({
-                ui_mode: "embedded",
-                return_url: "https://bytebloom.tech/store",
-                // cancel_url: "",
-                mode: "payment",
-                line_items: [
-                    {
-                        
-                    },
-                ],
-                
-                // ...
-            });
-        }
     }
 });
 

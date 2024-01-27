@@ -19,6 +19,7 @@
     <!-- Add Favicon and variants -->
 
     <link rel="stylesheet" href="css/store.css" type="text/css" />
+    <script src="https://js.stripe.com/v3/"></script>
 
 </head>
 
@@ -174,7 +175,9 @@
  
             </div>
 
-            <button class="checkout" type="button">Checkout</button>
+            <form action="/create-checkout-session" method="POST">
+                <button class="checkout" type="submit">Checkout</button>
+            </form>
         
         </div>
 

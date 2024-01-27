@@ -4,7 +4,7 @@
 let cart = [];
 
 function centsToDollars(cents) {
-// Make sure that cents is a number
+    // Make sure that cents is a number
     if (typeof cents !== 'number') {
         throw new Error('Input must be a number representing cents.');
     }
@@ -18,13 +18,10 @@ function centsToDollars(cents) {
 document.addEventListener("DOMContentLoaded", function () {
     const openSidebarMenu = document.querySelector("#openSidebarMenu");
     const overlay = document.querySelector("#overlay");
-/*  const checkmark = document.querySelector("img.checkmark"); */ // Removed for now
     const addToCartButtons = document.querySelectorAll("button.add-to-cart");
     const cartButton = document.querySelector("#cart");
     const cartOverlay = document.querySelector("#cart-overlay");
     const cartOverlayCloseButton = document.querySelector("button.close");
-    /* --- Stripe --- */
-    const checkoutButton = document.querySelector("button.checkout");
 
     // Close slide-menu on refresh
     if(openSidebarMenu.checked == true) {
@@ -109,28 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Event listener for the cart overlay's close button
     cartOverlayCloseButton.addEventListener("click", function() {
         cartOverlay.classList.add("hidden");
-    });
-
-    // Test if cookies are disabled, might need a more robust solution
-    if(document.cookie.length === 0) {
-        window.alert("Cookies seem to be disabled.\nYour shopping cart might not work correctly.\n\nTo ensure no errors occur,\nplease enable cookies in your browser settings.\n\nThank you!"); 
-    }
-
-    // Event listener for creating a Stripe checkout API call
-    checkoutButton.addEventListener("click", function() {
-        fetch("/create-checkout-session", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ /* unused */ }),
-        })
-        .then(function() {
-            window.alert(" Non-network Error"); 
-        })
-        .catch(function() {
-            window.alert("Network Error.");
-        });
     });
 
     // Used by "updateCartOverlay" function below
