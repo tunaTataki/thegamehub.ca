@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
         deleteButton.addEventListener('click', function() {
             // Remove the corresponding cart item element from the DOM
             cartItem.remove();
-            cart[productId][0] = 0; // Can the event listener see this variable?
+            cart[productId][0] = 0;
 
             // Sync database cart when cart items are deleted
             fetch("/push-cart", {
@@ -159,8 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateCartOverlay() {
         const cartContent = document.querySelector("div.cart-items-container");
 
-        // Clear existing content
-        cartContent.innerHTML = '';
+        cartContent.innerHTML = "";
 
         for(let i = 0; i < cart.length; i++) {
             if(cart[i][0] > 0) {
@@ -170,6 +169,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 const cartItem = createCartOverlayItem(quantity, productId);
                 cartContent.appendChild(cartItem);
             }
+        }
+
+        // Empty cart
+        if(cartContent.childElementCount === 0) {
+            const emptyCartMessage = document.createElement('div'); // Create "Empty cart" div and span
+            emptyCartMessage.classList.add('cart-overlay-item');
+
+            const message = document.createElement('span');
+            message.textContent = `Nothing yet!`;
+            emptyCartMessage.appendChild(message);
+
+            message.classList.add("empty-message");
+
+            cartContent.appendChild(emptyCartMessage);
+
+            document.querySelector("button.checkout").disabled = true; // Also disable checkout button
         }
     }
 });

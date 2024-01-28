@@ -1,5 +1,14 @@
 /* /var/www/html/bytebloom.tech/express/public/css/store.css */
 
+
+@font-face {
+    font-family: 'indieflowerregular';
+    src: url('/fonts/indie-flower/indieflower-webfont.woff2') format('woff2'),
+    url('/fonts/indie-flower/indieflower-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 @font-face {                                                   
     font-family: 'ralewaythin';                                
     src: url('/fonts/raleway/raleway-thin-webfont.woff2') format('woff2'),    
@@ -422,6 +431,10 @@ img[alt="The Game Hub Logo."] {
         display: none; 
     }
 
+    span.empty-message {
+        font-family: 'indieflowerregular', sans-serif;
+    }
+
     button.close {
         display: flex;
         justify-content: center;
@@ -647,6 +660,10 @@ img[alt="The Game Hub Logo."] {
 
     div.hidden {
         display: none; 
+    }
+
+    span.empty-message {
+        font-family: 'indieflowerregular', sans-serif;
     }
 
     button.close {
@@ -875,6 +892,10 @@ img[alt="The Game Hub Logo."] {
         display: none; 
     }
 
+    span.empty-message {
+        font-family: 'indieflowerregular', sans-serif;
+    }
+
     button.close {
         display: flex;
         justify-content: center;
@@ -1096,6 +1117,10 @@ img[alt="The Game Hub Logo."] {
         display: none; 
     }
 
+    span.empty-message {
+        font-family: 'indieflowerregular', sans-serif;
+    }
+
     button.close {
         display: flex;
         justify-content: center;
@@ -1307,6 +1332,10 @@ img[alt="The Game Hub Logo."] {
 
     div.hidden {
         display: none; 
+    }
+
+    span.empty-message {
+        font-family: 'indieflowerregular', sans-serif;
     }
 
     button.close {
@@ -1522,6 +1551,10 @@ img[alt="The Game Hub Logo."] {
 
     div.hidden {
         display: none; 
+    }
+
+    span.empty-message {
+        font-family: 'indieflowerregular', sans-serif;
     }
 
     button.close {

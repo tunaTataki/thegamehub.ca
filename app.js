@@ -23,44 +23,7 @@ app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.static("public"));
 
-// Stripe API call functions
-// async function stripePricesListAPICall {
-//     let obj = {};
-//     
-//     try {
-//         const stripePrices = await stripe.prices.list({ limit: 100 });
-//         obj.stripePrices = stripePrices;
-//     } catch (error) {
-//         obj.stripePrices = { "error": "Error fetching Stripe prices" };
-//     }
-// 
-//     return obj;
-// }
-// 
-// async function stripeProductsListAPICall {
-//     let obj = {};
-//     
-//     try {
-//         const stripeProducts = await stripe.products.list({ limit: 100 });
-//         obj.stripeProducts = stripeProducts;
-//     } catch (error) {
-//         obj.stripeProducts = { "error": "Error fetching Stripe products" };
-//     }
-// 
-//     return obj;
-// }
-
 async function stripeAPICalls() {
-
-     // let obj = {};
-     // 
-     // let prices = stripePricesListAPICall(); 
-     // let products = stripeProductsListAPICall();
-     // 
-     // obj.stripePrices = prices.stripePrices;
-     // obj.stripeProducts = products.stripeProducts;
-     // 
-     // return obj;
      
     let obj = {};
 
@@ -205,6 +168,7 @@ app.get("/", function(req, res) {
             signed: true,
             maxAge: 2629746000,
             secure: true,
+            sameSite: "None",
         });
     } else {
         // Refresh cookie expiry, new cookie with same unique UID
@@ -212,6 +176,7 @@ app.get("/", function(req, res) {
             signed: true,
             maxAge: 2629746000,
             secure: true,
+            sameSite: "None",
         });
     }
 
@@ -226,6 +191,7 @@ app.get("/signup", function(req, res) {
             signed: true,
             maxAge: 2629746000,
             secure: true,
+            sameSite: "None",
         });
     } else {
         // Refresh cookie expiry, new cookie with same unique UID
@@ -233,6 +199,7 @@ app.get("/signup", function(req, res) {
             signed: true,
             maxAge: 2629746000,
             secure: true,
+            sameSite: "None",
         });
     }
 
@@ -247,6 +214,7 @@ app.get("/login", function(req, res) {
             signed: true,
             maxAge: 2629746000,
             secure: true,
+            sameSite: "None",
         });
     } else {
         // Refresh cookie expiry, new cookie with same unique UID
@@ -254,6 +222,7 @@ app.get("/login", function(req, res) {
             signed: true,
             maxAge: 2629746000,
             secure: true,
+            sameSite: "None",
         });
     }
 
@@ -268,6 +237,7 @@ app.get("/store", function(req, res) {
             signed: true,
             maxAge: 2629746000,
             secure: true,
+            sameSite: "None",
         });
     } else {
         // Refresh cookie expiry, new cookie with same unique UID
@@ -275,6 +245,7 @@ app.get("/store", function(req, res) {
             signed: true,
             maxAge: 2629746000,
             secure: true,
+            sameSite: "None",
         });
     }
     
